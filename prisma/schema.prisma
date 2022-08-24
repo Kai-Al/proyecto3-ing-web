@@ -31,24 +31,29 @@ enum Enum_EstadoBug {
 }
 
 model Usuario {
-  id             String    @id @default(cuid())
-  identificacion String    @unique
+  id             String       @id @default(cuid())
+  identificacion String       @unique
   nombre         String
-  email          String    @unique
+  email          String       @unique
   isHabilitado   Boolean
   role           Enum_Role
-  //  proyectos      Proyecto[]
-  //  comentarios    Comentario[]
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  proyectos      Proyecto[]
+  comentarios    Comentario[]
+  bugs           Bug[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Proyecto {
-  id          String   @id @default(cuid())
-  nombre      String   @unique
+  id          String    @id @default(cuid())
+  nombre      String    @unique
   descripcion String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  usuarios    Usuario[]
+  bugs        Bug[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Bug {
@@ -56,14 +61,28 @@ model Bug {
   prioridad   Enum_PrioridadBug
   estado      Enum_EstadoBug
   descripcion String
+  Usuario     Usuario           @relation(fields: [usuarioId], references: [id])
+  usuarioId   String
+  Proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
+  proyectoId  String
+  comentarios Comentario[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Comentario {
-  id              String   @id @default(cuid())
+  id              String  @id @default(cuid())
   textoComentario String
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  usuario         Usuario @relation(fields: [usuarioId], references: [id])
+  usuarioId       String
+  Bug             Bug     @relation(fields: [bugId], references: [id])
+  bugId           String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  respuestas   Comentario[] @relation("ComentarioRespuestas")
+  Comentario   Comentario?  @relation("ComentarioRespuestas", fields: [comentarioId], references: [id])
+  comentarioId String?
 }
