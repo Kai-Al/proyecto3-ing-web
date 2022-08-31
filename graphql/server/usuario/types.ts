@@ -14,7 +14,7 @@ const usuarioTypes = gql`
         email: String
         isHabilitado: Boolean
         role: Enum_Role
-        proyectos: [Proyecto]
+        #proyectos: [Proyecto]
         #comentarios: [Comentario]
         #bugs: [Bug]
     }
