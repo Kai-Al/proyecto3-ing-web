@@ -8,13 +8,13 @@ const usuarioTypes = gql`
     }
 
     type Usuario {
-        id: ID!
-        identificacion: String!
-        nombre: String!
-        email: String!
-        isHabilitado: Boolean!
-        role: Enum_Role!
-        #proyectos: [Proyecto]
+        id: ID
+        identificacion: String
+        nombre: String
+        email: String
+        isHabilitado: Boolean
+        role: Enum_Role
+        proyectos: [Proyecto]
         #comentarios: [Comentario]
         #bugs: [Bug]
     }
@@ -24,6 +24,7 @@ const usuarioTypes = gql`
     }
 
     type Mutation {
+        setUsuario(identificacion: String!, nombre: String!, email: String!): Usuario
     }
 `;
 
