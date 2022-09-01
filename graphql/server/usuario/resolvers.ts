@@ -20,6 +20,20 @@ const usuarioResolvers: Resolver = {
                 },
             });
             return usuario;
+        },
+        updateUsuario: async (parent, args) => {
+            const usuario = await prisma.usuario.update({
+                where: {
+                    id: args.id,
+                },
+                data: {
+                    nombre: args.nombre,
+                    email: args.email,
+                    isHabilitado: args.isHabilitado,
+                    role: args.role,
+                },
+            });
+            return usuario;
         }
     },
 };

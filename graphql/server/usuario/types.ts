@@ -30,7 +30,8 @@ const usuarioTypes = gql`
     }
 
     type Mutation {
-        setUsuario(data: UsuarioCreateInput): Usuario
+        setUsuario(data: UsuarioCreateInput): Usuario,
+        updateUsuario(id: ID, nombre: String, email: String, isHabilitado: Boolean, role: Enum_Role): Usuario,
     }
 `;
 
