@@ -23,7 +23,7 @@ const comentarioTypes = gql`
     obtenerComentario(id: String): Comentario
   }
   type Mutation {
-    random(identificacion: String!, nombre: String!, email: String!): Usuario
+    random(identificacion: String!, nombre: String!): Usuario
   }
 `;
 
