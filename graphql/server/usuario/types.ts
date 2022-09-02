@@ -7,6 +7,12 @@ const usuarioTypes = gql`
         Desarrrollador
     }
 
+    input UsuarioCreateInput {
+        identificacion: String!
+        nombre: String!
+        email: String!
+    }
+
     type Usuario {
         id: ID
         identificacion: String
@@ -24,7 +30,8 @@ const usuarioTypes = gql`
     }
 
     type Mutation {
-        setUsuario(identificacion: String!, nombre: String!, email: String!): Usuario
+        setUsuario(data: UsuarioCreateInput): Usuario,
+        updateUsuario(id: ID, nombre: String, email: String, isHabilitado: Boolean, role: Enum_Role): Usuario,
     }
 `;
 
