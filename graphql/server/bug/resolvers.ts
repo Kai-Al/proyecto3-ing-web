@@ -40,10 +40,8 @@ const bugResolvers: Resolver = {
           prioridad: args.prioridad,
           estado: args.estado,
           descripcion: args.descripcion,
-          // Usuario: args.Usuario,
           usuarioId: args.usuarioId,
           proyectoId: args.proyectoId,
-          Proyecto: args.Proyecto,
         },
       });
       return bug;

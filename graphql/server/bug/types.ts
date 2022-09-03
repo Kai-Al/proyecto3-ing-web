@@ -45,10 +45,8 @@ const bugTypes = gql`
       prioridad: Enum_PrioridadBug
       estado: Enum_EstadoBug
       descripcion: String
-      usuario: Usuario
       usuarioId: String
       proyectoId: String
-      Proyecto: Proyecto
     ): Bug
     deleteBug(id: ID): Boolean
   }
