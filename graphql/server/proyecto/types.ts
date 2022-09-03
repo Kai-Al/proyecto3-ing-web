@@ -11,8 +11,8 @@ const proyectoTypes = gql`
     nombre: String
     descripcion: String
     clienteEmail: String
-    #newDevelopers: [String]
-    #firedDevelopers: [String]
+    newDevelopers: [String]
+    firedDevelopers: [String]
   }
   
   type Proyecto {

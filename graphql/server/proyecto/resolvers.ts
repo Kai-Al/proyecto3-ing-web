@@ -5,6 +5,16 @@ import { connect } from 'http2';
 
 
 const proyectoResolvers: Resolver = {
+  Proyecto: {
+    usuarios: async (parent, args) => {
+      const usuarios = await prisma.proyecto.findUnique({
+        where: {
+          id: parent.id
+        }
+      }).usuarios();
+      return usuarios;
+    }
+  },
   Query: {
     obtenerProyectos: async (parent, args) => {
       const proyecto = await prisma.proyecto.findMany();
@@ -36,19 +46,34 @@ const proyectoResolvers: Resolver = {
       });
     },
     updateProyecto: async (parent, args) => { 
+      const usuarios = await prisma.proyecto.findFirst({
+        where: {
+          nombre: args.name,
+        }
+      }).usuarios();
+      var usuariosEmails = usuarios.map((usuario) => usuario.email);      
+      
+      
+      if(args.data !== undefined){
+        
+        if(args.data.firedDevelopers){
+          usuariosEmails = usuariosEmails.filter(email => !args.data.firedDevelopers.includes(email));
+        }
+        if(args.data.newDevelopers){
+          usuariosEmails = usuariosEmails.concat(args.data.newDevelopers)
+        }
+      } else{
+        
+      }
       return await prisma.proyecto.update({
         where: {
           nombre: args.name,
         },
         data: {
-          nombre: args.data.newName,
+          nombre: args.data.nombre,          
           descripcion: args.data.descripcion,
           usuarios: {
-            set: [
-              {
-                email: args.data.clienteEmail,
-              }, 
-            ]
+            set: usuariosEmails.map(email => ({email}))
           }
         }
       });
