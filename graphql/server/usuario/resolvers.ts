@@ -36,12 +36,10 @@ const usuarioResolvers: Resolver = {
         updateUsuario: async (parent, args) => {
             const usuario = await prisma.usuario.update({
                 where: {
-                    email: args.email,
+                    email: args.emailOriginal,
                 },
                 data: {
-                    nombre: args.data.nombre,
-                    email: args.data.newEmail,
-                    role: args.data.role,
+                  ...args.data
                 },
             });
             return usuario;

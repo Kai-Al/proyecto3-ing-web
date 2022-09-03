@@ -1,6 +1,8 @@
 import { Resolver } from 'types';
 import prisma from 'config/prisma';
 import { usuarioResolvers } from '../usuario/resolvers';
+import { connect } from 'http2';
+
 
 const proyectoResolvers: Resolver = {
   Query: {
@@ -19,7 +21,7 @@ const proyectoResolvers: Resolver = {
           descripcion: args.data.descripcion,
           usuarios: {
             connect: {
-              email: args.data.clienteEmail,
+              email: args.data.email,
             },
           },
         },
@@ -33,14 +35,7 @@ const proyectoResolvers: Resolver = {
         }
       });
     },
-    updateProyecto: async (parent, args) => {      
-      const usuarios = await prisma.proyecto.findUnique({
-        where: {
-          nombre: args.name,
-        }
-      }).usuarios();
-      console.log(usuarios);
-      //return;
+    updateProyecto: async (parent, args) => { 
       return await prisma.proyecto.update({
         where: {
           nombre: args.name,
@@ -49,10 +44,12 @@ const proyectoResolvers: Resolver = {
           nombre: args.data.newName,
           descripcion: args.data.descripcion,
           usuarios: {
-            set: [args.data.clienteEmail],
+            set: [
+              {
+                email: args.data.clienteEmail,
+              }, 
+            ]
           }
-          
-          
         }
       });
     }

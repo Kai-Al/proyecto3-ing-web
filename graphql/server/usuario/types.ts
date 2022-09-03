@@ -15,7 +15,7 @@ const usuarioTypes = gql`
 
   input UsuarioUpdateInput {
       nombre: String
-      newEmail: String
+      email: String
       role: Enum_Role
   }
 
@@ -37,7 +37,7 @@ const usuarioTypes = gql`
 
   type Mutation {
       setUsuario(data: UsuarioCreateInput): Usuario,
-      updateUsuario(email: String!, data: UsuarioUpdateInput): Usuario,
+      updateUsuario(emailOriginal: String!, data: UsuarioUpdateInput): Usuario,
       deleteUsuario(email: String!): Usuario
   }
 `;

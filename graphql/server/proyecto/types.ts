@@ -8,11 +8,11 @@ const proyectoTypes = gql`
   }
 
   input ProyectoUpdateInput {
-    newName: String
+    nombre: String
     descripcion: String
     clienteEmail: String
-    newDevelopers: [String]
-    firedDevelopers: [String]
+    #newDevelopers: [String]
+    #firedDevelopers: [String]
   }
   
   type Proyecto {
@@ -29,8 +29,8 @@ const proyectoTypes = gql`
 
   type Mutation {
     setProyecto(data: ProyectoCreateInput): Proyecto,
-    deleteProyecto(nombre: String): Proyecto,
-    updateProyecto(name:String, data: ProyectoUpdateInput): Proyecto,
+    deleteProyecto(nombre: String!): Proyecto,
+    updateProyecto(name:String!, data: ProyectoUpdateInput): Proyecto,
   }
 `;
 
