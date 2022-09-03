@@ -39,9 +39,7 @@ const proyectoResolvers: Resolver = {
         data: {
           nombre: args.data.newName,
           descripcion: args.data.descripcion,
-          usuarios: {
-            set: 
-          }
+          
         }
       });
     }
