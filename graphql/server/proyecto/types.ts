@@ -1,11 +1,25 @@
 import { gql } from 'apollo-server-micro';
 
 const proyectoTypes = gql`
+  input ProyectoCreateInput {
+    nombre: String!
+    descripcion: String!
+    clienteEmail: String!
+  }
+
+  input ProyectoUpdateInput {
+    newName: String
+    descripcion: String
+    clienteEmail: String
+    newDevelopers: [String]
+    firedDevelopers: [String]
+  }
+  
   type Proyecto {
     id: ID
     nombre: String
     descripcion: String
-    #usuarios: [Usuario]
+    usuarios: [Usuario]
     #bugs: [Bug]
   }
 
@@ -14,7 +28,9 @@ const proyectoTypes = gql`
   }
 
   type Mutation {
-    setProyecto(id: String, nombre: String, descripcion: String): Proyecto
+    setProyecto(data: ProyectoCreateInput): Proyecto,
+    deleteProyecto(nombre: String): Proyecto,
+    updateProyecto(name:String, data: ProyectoUpdateInput): Proyecto,
   }
 `;
 
