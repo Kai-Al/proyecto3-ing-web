@@ -15,24 +15,42 @@ const bugTypes = gql`
     Finalizado
   }
 
+  input BugCreateInput {
+    descripcion: String
+    usuarioId: String
+    proyectoId: String
+  }
+
   type Bug {
     id: ID
     prioridad: Enum_PrioridadBug
     estado: Enum_EstadoBug
     descripcion: String
-    Usuario: Usuario
+    #usuario: Usuario
     usuarioId: String
-    #Proyecto: Proyecto
     proyectoId: String
+    #Proyecto: Proyecto
     #comentarios: [Comentario]
   }
 
   type Query {
     obtenerBugs: [Bug]
+    obtenerBug: Bug
   }
 
   type Mutation {
-    setBug(descripcion: String!): Bug
+    setBug(data: BugCreateInput): Bug
+    updateBug(
+      id: ID
+      prioridad: Enum_PrioridadBug
+      estado: Enum_EstadoBug
+      descripcion: String
+      usuario: Usuario
+      usuarioId: String
+      proyectoId: String
+      Proyecto: Proyecto
+    ): Bug
+    deleteBug(id: ID): Boolean
   }
 `;
 
