@@ -9,6 +9,8 @@ const proyectoResolvers: Resolver = {
       return proyecto;
     },
   },
+  
+  
   Mutation: {
     setProyecto: async (parent, args) => {
       const nuevoProyecto = await prisma.proyecto.create({
@@ -31,7 +33,14 @@ const proyectoResolvers: Resolver = {
         }
       });
     },
-    updateProyecto: async (parent, args) => {
+    updateProyecto: async (parent, args) => {      
+      const usuarios = await prisma.proyecto.findUnique({
+        where: {
+          nombre: args.name,
+        }
+      }).usuarios();
+      console.log(usuarios);
+      //return;
       return await prisma.proyecto.update({
         where: {
           nombre: args.name,
@@ -39,6 +48,10 @@ const proyectoResolvers: Resolver = {
         data: {
           nombre: args.data.newName,
           descripcion: args.data.descripcion,
+          usuarios: {
+            set: [args.data.clienteEmail],
+          }
+          
           
         }
       });
