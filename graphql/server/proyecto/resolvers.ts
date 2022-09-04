@@ -20,6 +20,13 @@ const proyectoResolvers: Resolver = {
       const proyecto = await prisma.proyecto.findMany();
       return proyecto;
     },
+    obtenerProyecto: async (parent, args) => {
+      return await prisma.proyecto.findUnique({
+        where: {
+          nombre: args.nombre
+        }
+      });
+    }
   },
   
   
@@ -31,7 +38,7 @@ const proyectoResolvers: Resolver = {
           descripcion: args.data.descripcion,
           usuarios: {
             connect: {
-              email: args.data.email,
+              email: args.data.clienteEmail,
             },
           },
         },
@@ -56,14 +63,12 @@ const proyectoResolvers: Resolver = {
       
       if(args.data !== undefined){
         
-        if(args.data.firedDevelopers){
-          usuariosEmails = usuariosEmails.filter(email => !args.data.firedDevelopers.includes(email));
+        if(args.data.firedUsers){
+          usuariosEmails = usuariosEmails.filter(email => !args.data.firedUsers.includes(email));
         }
-        if(args.data.newDevelopers){
-          usuariosEmails = usuariosEmails.concat(args.data.newDevelopers)
+        if(args.data.newUsers){
+          usuariosEmails = usuariosEmails.concat(args.data.newUsers)
         }
-      } else{
-        
       }
       return await prisma.proyecto.update({
         where: {
