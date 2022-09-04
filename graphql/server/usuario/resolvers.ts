@@ -2,6 +2,19 @@ import { Resolver } from 'types';
 import prisma from 'config/prisma';
 
 const usuarioResolvers: Resolver = {
+    Usuario: {
+        proyectos: async (parent, args) => {            
+            return await prisma.proyecto.findMany({
+                where: {
+                    usuarios: {
+                        some: {
+                            id: parent.id                            
+                        }
+                    }
+                }
+            });
+        }
+    },
     Query: {
         obtenerUsuarios: async (parent, args) => {
             const usuario = await prisma.usuario.findMany();
@@ -15,7 +28,6 @@ const usuarioResolvers: Resolver = {
                     identificacion: args.data.identificacion,
                     nombre: args.data.nombre,
                     email: args.data.email,
-                    isHabilitado: false,
                     role: 'Cliente',
                 },
             });
@@ -24,16 +36,20 @@ const usuarioResolvers: Resolver = {
         updateUsuario: async (parent, args) => {
             const usuario = await prisma.usuario.update({
                 where: {
-                    id: args.id,
+                    email: args.emailOriginal,
                 },
                 data: {
-                    nombre: args.nombre,
-                    email: args.email,
-                    isHabilitado: args.isHabilitado,
-                    role: args.role,
+                  ...args.data
                 },
             });
             return usuario;
+        },
+        deleteUsuario: async (parent, args) => {
+            return await prisma.usuario.delete({
+                where: {
+                    email: args.email,
+                }
+            });
         }
     },
 };

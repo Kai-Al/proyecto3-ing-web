@@ -7,31 +7,39 @@ const usuarioTypes = gql`
     Desarrrollador
   }
 
-    input UsuarioCreateInput {
-        identificacion: String!
-        nombre: String!
-        email: String!
-    }
+  input UsuarioCreateInput {
+      identificacion: String!
+      nombre: String!
+      email: String!
+  }
 
-    type Usuario {
-        id: ID
-        identificacion: String
-        nombre: String
-        email: String
-        isHabilitado: Boolean
-        role: Enum_Role
-        #proyectos: [Proyecto]
-        #comentarios: [Comentario]
-        #bugs: [Bug]
-    }
+  input UsuarioUpdateInput {
+      nombre: String
+      email: String
+      role: Enum_Role
+  }
+
+  type Usuario {
+      id: ID
+      identificacion: String
+      nombre: String
+      email: String
+      role: Enum_Role
+      proyectos: [Proyecto]
+      comentarios: [Comentario]
+      bugs: [Bug]
+  }
 
   type Query {
-    obtenerUsuarios: [Usuario]
+    obtenerUsuarios: [Usuario],
+    obtenerUsuario(email: String): Usuario
   }
-    type Mutation {
-        setUsuario(data: UsuarioCreateInput): Usuario,
-        updateUsuario(id: ID, nombre: String, email: String, isHabilitado: Boolean, role: Enum_Role): Usuario,
-    }
+
+  type Mutation {
+      setUsuario(data: UsuarioCreateInput): Usuario,
+      updateUsuario(emailOriginal: String!, data: UsuarioUpdateInput): Usuario,
+      deleteUsuario(email: String!): Usuario
+  }
 `;
 
 export { usuarioTypes };

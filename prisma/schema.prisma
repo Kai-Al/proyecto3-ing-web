@@ -35,7 +35,6 @@ model Usuario {
   identificacion String       @unique
   nombre         String
   email          String       @unique
-  isHabilitado   Boolean
   role           Enum_Role
   proyectos      Proyecto[]
   comentarios    Comentario[]
