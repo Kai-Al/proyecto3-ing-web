@@ -14,6 +14,18 @@ const ComentarioResolvers: Resolver = {
   //     return transactions;
   //   },
   // },
+
+  Comentario: {
+    usuario: async (parent, args) => {
+      const usuario = await prisma.usuario.findUnique({
+        where: {
+          id: parent.usuarioId,
+        },
+      });
+      console.log(usuario);
+      return usuario;
+    },
+  },
   Query: {
     obtenerComentario: async (parent, args) => {
       const comentario = await prisma.comentario.findUnique({
