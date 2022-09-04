@@ -18,18 +18,23 @@ const bugResolvers: Resolver = {
   },
   Mutation: {
     setBug: async (parent, args) => {
-      const bug = await prisma.bug.create({
+      return await prisma.bug.create({
         data: {
-          prioridad: args.data.prioridad,
-          estado: args.data.estado,
           descripcion: args.data.descripcion,
-          // Usuario: args.data.Usuario,
-          usuarioId: args.data.usuarioId,
-          proyectoId: args.data.proyectoId,
-          Proyecto: args.data.Proyecto,
+          prioridad: args.data.prioridad,
+          estado: "NoIniciado",
+          usuario: {
+            connect: {
+              email: args.data.authorEmail,
+            }
+          },
+          proyecto: {
+            connect: {
+              nombre: args.data.nameProyecto,
+            },
+          },
         },
       });
-      return bug;
     },
     updateBug: async (parent, args) => {
       const bug = await prisma.bug.update({

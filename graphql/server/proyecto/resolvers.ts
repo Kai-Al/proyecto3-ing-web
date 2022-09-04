@@ -82,7 +82,7 @@ const proyectoResolvers: Resolver = {
           }
         }
       });
-    }
+    },
   },
 };
 
