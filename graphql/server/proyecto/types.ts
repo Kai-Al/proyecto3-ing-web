@@ -10,9 +10,8 @@ const proyectoTypes = gql`
   input ProyectoUpdateInput {
     nombre: String
     descripcion: String
-    clienteEmail: String
-    newDevelopers: [String]
-    firedDevelopers: [String]
+    newUsers: [String]
+    firedUsers: [String]
   }
   
   type Proyecto {
@@ -24,7 +23,8 @@ const proyectoTypes = gql`
   }
 
   type Query {
-    obtenerProyectos: [Proyecto]
+    obtenerProyectos: [Proyecto],
+    obtenerProyecto(nombre: String!): Proyecto,
   }
 
   type Mutation {
