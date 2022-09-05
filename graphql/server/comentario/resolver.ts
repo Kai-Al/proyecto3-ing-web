@@ -2,19 +2,6 @@ import prisma from '@config/prisma';
 import { Resolver } from 'types';
 
 const ComentarioResolvers: Resolver = {
-  // User: {
-  //   transactions: async (parent, args) => {
-  //     const transactions = await prisma.transaction.findMany({
-  //       where: {
-  //         userId: {
-  //           equals: parent.id,
-  //         },
-  //       },
-  //     });
-  //     return transactions;
-  //   },
-  // },
-
   Comentario: {
     usuario: async (parent, args) => {
       const usuario = await prisma.usuario.findUnique({
@@ -22,8 +9,15 @@ const ComentarioResolvers: Resolver = {
           id: parent.usuarioId,
         },
       });
-      console.log(usuario);
       return usuario;
+    },
+    bug: async (parent, args) => {
+      const bug = await prisma.bug.findUnique({
+        where: {
+          id: parent.bugId,
+        },
+      });
+      return bug;
     },
   },
   Query: {
@@ -35,53 +29,89 @@ const ComentarioResolvers: Resolver = {
       });
       return comentario;
     },
-    // obtenerUsuario: async (parent, args) => {
-    //   const user = await prisma.user.findUnique({
-    //     where: {
-    //       email: args.email,
-    //     },
-    //   });
-    //   return user;
-    // },
-    // contarUsuarios: async () => {
-    //   const conteo = await prisma.user.count();
-
-    //   return conteo;
-    // },
   },
   Mutation: {
-    // crearUsuario: async (parent, args) => {
-    //   const newUser = await prisma.user.create({
-    //     data: {
-    //       name: args.data.name,
-    //       email: args.data.email,
-    //       phoneNumber: args.data.phoneNumber,
-    //       document: args.data.document,
-    //     },
-    //   });
-    //   return newUser;
-    // },
-    // updateUser: async (parent, args) => {
-    //   const updatedUser = await prisma.user.update({
-    //     where: {
-    //       id: args.id,
-    //     },
-    //     data: {
-    //       name: {
-    //         set: args.name,
-    //       },
-    //     },
-    //   });
-    //   return updatedUser;
-    // },
-    // deleteUser: async (parent, args) => {
-    //   const deletedUser = await prisma.user.delete({
-    //     where: {
-    //       id: args.id,
-    //     },
-    //   });
-    //   return deletedUser;
-    // },
+    crearComentario: async (parent, args) => {
+      const newComentario = await prisma.comentario.create({
+        data: {
+          id: args.data.id,
+          textoComentario: args.data.textoComentario,
+          bugId: args.data.bugId,
+          usuarioId: args.data.usuarioId,
+        },
+      });
+      return newComentario;
+    },
+    actualizarComentario: async (parent, args) => {
+      const updateComentario = await prisma.comentario.update({
+        where: {
+          id: args.data.id,
+        },
+        data: {
+          id: args.data.id,
+          textoComentario: args.data.textoComentario,
+          bugId: args.data.bugId,
+          usuarioId: args.data.usuarioId,
+        },
+      });
+      return updateComentario;
+    },
+    actualizarIdComentario: async (parent, args) => {
+      const updateIdComentario = await prisma.comentario.update({
+        where: {
+          id: args.data.id,
+        },
+        data: {
+          id: args.data.id,
+        },
+      });
+      return updateIdComentario;
+    },
+
+    actualizarTextoComentario: async (parent, args) => {
+      const updateTextoComentario = await prisma.comentario.update({
+        where: {
+          id: args.data.id,
+        },
+        data: {
+          textoComentario: args.data.textoComentario,
+        },
+      });
+      return updateTextoComentario;
+    },
+
+    actualizarBugIdComentario: async (parent, args) => {
+      const updateBugIdComentario = await prisma.comentario.update({
+        where: {
+          id: args.data.id,
+        },
+        data: {
+          bugId: args.data.bugId,
+        },
+      });
+      return updateBugIdComentario;
+    },
+
+    actualizarUsuarioIdComentario: async (parent, args) => {
+      const updateUsuarioIdComentario = await prisma.comentario.update({
+        where: {
+          id: args.data.id,
+        },
+        data: {
+          usuarioId: args.data.usuarioId,
+        },
+      });
+      return updateUsuarioIdComentario;
+    },
+
+    eliminarComentario: async (parent, args) => {
+      const eliminarComentario = await prisma.comentario.delete({
+        where: {
+          id: args.data.id,
+        },
+      });
+      return eliminarComentario;
+    },
   },
 };
 
