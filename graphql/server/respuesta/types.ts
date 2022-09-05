@@ -13,7 +13,6 @@ const respuestaTypes = gql`
   }
 
   input CrearRespuestaInput {
-    id: String!
     textoRespuesta: String!
     comentarioId: String!
     usuarioId: String!

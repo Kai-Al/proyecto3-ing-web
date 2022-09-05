@@ -16,7 +16,6 @@ const comentarioTypes = gql`
   }
 
   input CrearComentarioInput {
-    id: String!
     textoComentario: String!
     bugId: String!
     usuarioId: String!
