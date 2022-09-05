@@ -35,6 +35,7 @@ model Bug {
   id          String            @id @default(cuid())
   prioridad   Enum_PrioridadBug
   estado      Enum_EstadoBug
+  carga       String
   descripcion String
   proyectoId  String
   usuarioId   String

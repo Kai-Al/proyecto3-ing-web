@@ -31,7 +31,7 @@ const bugTypes = gql`
     #usuarioId: String
     #proyectoId: String
     proyecto: Proyecto
-    #comentarios: [Comentario]
+    comentarios: [Comentario]
   }
 
   type Query {
