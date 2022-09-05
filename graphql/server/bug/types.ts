@@ -17,7 +17,7 @@ const bugTypes = gql`
 
   input BugCreateInput {
     descripcion: String
-    authorEmail: String
+    #authorEmail: String
     nameProyecto: String
     prioridad: Enum_PrioridadBug
   }

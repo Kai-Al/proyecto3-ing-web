@@ -13,60 +13,60 @@ model Usuario {
   nombre         String
   email          String       @unique
   role           Enum_Role
-  bugs           Bug[]
-  comentarios    Comentario[]
-  proyectos      Proyecto[]
-  Respuesta      Respuesta[]
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
+  bugs           Bug[]
+  comentarios    Comentario[]
+  Respuesta      Respuesta[]
+  proyectos      Proyecto[]
 }
 
 model Proyecto {
   id          String    @id @default(cuid())
   nombre      String    @unique
   descripcion String
-  bugs        Bug[]
-  usuarios    Usuario[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+  bugs        Bug[]
+  usuarios    Usuario[]
 }
 
 model Bug {
   id          String            @id @default(cuid())
   prioridad   Enum_PrioridadBug
   estado      Enum_EstadoBug
-  carga       String
   descripcion String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
   proyectoId  String
   usuarioId   String
+  carga       String
   proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
   usuario     Usuario           @relation(fields: [usuarioId], references: [id])
   comentarios Comentario[]
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
 }
 
 model Comentario {
   id              String      @id @default(cuid())
   textoComentario String
-  usuario         Usuario     @relation(fields: [usuarioId], references: [id])
-  usuarioId       String
-  bug             Bug         @relation(fields: [bugId], references: [id])
-  bugId           String
-  respuestas      Respuesta[]
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+  bugId           String
+  usuarioId       String
+  bug             Bug         @relation(fields: [bugId], references: [id])
+  usuario         Usuario     @relation(fields: [usuarioId], references: [id])
+  respuestas      Respuesta[]
 }
 
 model Respuesta {
-  id             String      @id @default(cuid())
+  id             String     @id @default(cuid())
   textoRespuesta String
-  usuario        Usuario     @relation(fields: [usuarioId], references: [id])
   usuarioId      String
-  comentario     Comentario? @relation(fields: [comentarioId], references: [id])
-  comentarioId   String?
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  comentarioId   String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  comentario     Comentario @relation(fields: [comentarioId], references: [id])
+  usuario        Usuario    @relation(fields: [usuarioId], references: [id])
 }
 
 enum Enum_Role {
