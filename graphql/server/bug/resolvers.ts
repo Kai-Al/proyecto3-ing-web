@@ -2,6 +2,22 @@ import { Resolver } from 'types';
 import prisma from 'config/prisma';
 
 const bugResolvers: Resolver = {
+  Bug: {
+    proyecto: async (parent) => {
+      return await prisma.bug.findUnique({
+        where: {
+          id: parent.id,
+        },
+      }).proyecto();
+    },
+    usuario: async (parent) => {
+      return await prisma.bug.findUnique({
+        where: {
+          id: parent.id,
+        },
+      }).usuario();
+    },
+  },
   Query: {
     obtenerBugs: async (parent, args) => {
       const bug = await prisma.bug.findMany();
@@ -25,29 +41,25 @@ const bugResolvers: Resolver = {
           estado: 'NoIniciado',
           usuario: {
             connect: {
-              email: args.data.authorEmail,
-            },
+              email: "NULL"
+            }
           },
           proyecto: {
             connect: {
               nombre: args.data.nameProyecto,
             },
           },
-          carga: 'Por asignar',
+          carga: '',
           
         },
       }),
-    updateBug: async (parent, args) => {
+    updateBugCliente: async (parent, args) => {
       const bug = await prisma.bug.update({
         where: {
-          id: args.id,
+          id: args.data.id,
         },
         data: {
-          prioridad: args.prioridad,
-          estado: args.estado,
-          descripcion: args.descripcion,
-          usuarioId: args.usuarioId,
-          proyectoId: args.proyectoId,
+          ...args.data
         },
       });
       return bug;

@@ -9,7 +9,7 @@ const usuarioResolvers: Resolver = {
         where: {
           usuarios: {
             some: {
-              
+              id: parent.id
             }
           }
         },

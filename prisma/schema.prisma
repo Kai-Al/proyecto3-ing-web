@@ -8,18 +8,19 @@ datasource db {
 }
 
 model Bug {
-  id          String            @id @default(cuid())
-  prioridad   Enum_PrioridadBug
-  estado      Enum_EstadoBug
-  descripcion String
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  proyectoId  String
-  usuarioId   String
-  carga       String?
-  proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
-  usuario     Usuario?          @relation(fields: [usuarioId], references: [id])
-  comentarios Comentario[]
+  id           String            @id @default(cuid())
+  prioridad    Enum_PrioridadBug
+  estado       Enum_EstadoBug
+  descripcion  String
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  proyectoId   String
+  usuarioId    String
+  carga        String?
+  proyecto     Proyecto          @relation(fields: [proyectoId], references: [id])
+  usuario      Usuario           @relation(fields: [usuarioId], references: [id])
+  comentarios  Comentario[]
+  isFinalizado Boolean           @default(false)
 }
 
 model Comentario {

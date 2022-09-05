@@ -17,9 +17,15 @@ const bugTypes = gql`
 
   input BugCreateInput {
     descripcion: String
-    #authorEmail: String
     nameProyecto: String
     prioridad: Enum_PrioridadBug
+  }
+
+  input BugUpdateClienteInput {
+    id: String
+    descripcion: String
+    prioridad: Enum_PrioridadBug
+    isFinalizado: Boolean
   }
 
   type Bug {
@@ -29,6 +35,7 @@ const bugTypes = gql`
     estado: Enum_EstadoBug
     usuario: Usuario
     carga: String
+    isFinalizado: Boolean
     #usuarioId: String
     #proyectoId: String
     proyecto: Proyecto
@@ -37,20 +44,13 @@ const bugTypes = gql`
 
   type Query {
     obtenerBugs: [Bug]
-    obtenerBug: Bug
+    obtenerBug(id: String): Bug
   }
 
   type Mutation {
     setBug(data: BugCreateInput): Bug
-    updateBug(
-      id: ID
-      prioridad: Enum_PrioridadBug
-      estado: Enum_EstadoBug
-      descripcion: String
-      usuarioId: String
-      proyectoId: String
-    ): Bug
-    deleteBug(id: ID): Boolean
+    updateBugCliente(data: BugUpdateClienteInput): Bug
+    deleteBug(id: String): Bug
   }
 `;
 

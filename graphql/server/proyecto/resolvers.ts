@@ -42,12 +42,14 @@ const proyectoResolvers: Resolver = {
       });
       return nuevoProyecto;
     },
-    deleteProyecto: async (parent, args) =>
-      await prisma.proyecto.delete({
+    deleteProyecto: async (parent, args) =>{
+      const proyecto = await prisma.proyecto.delete({
         where: {
           nombre: args.nombre,
         },
-      }),
+      });
+      return proyecto;
+    },
     updateProyecto: async (parent, args) => {
       const usuarios = await prisma.proyecto
         .findFirst({
