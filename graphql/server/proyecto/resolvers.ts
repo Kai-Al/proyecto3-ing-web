@@ -1,8 +1,5 @@
 import { Resolver } from 'types';
 import prisma from 'config/prisma';
-import { usuarioResolvers } from '../usuario/resolvers';
-import { connect } from 'http2';
-
 
 const proyectoResolvers: Resolver = {
   Proyecto: {
