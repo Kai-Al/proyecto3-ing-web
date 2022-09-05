@@ -17,16 +17,16 @@ const bugResolvers: Resolver = {
     },
   },
   Mutation: {
-    setBug: async (parent, args) => {
-      return await prisma.bug.create({
+    setBug: async (parent, args) =>
+      await prisma.bug.create({
         data: {
           descripcion: args.data.descripcion,
           prioridad: args.data.prioridad,
-          estado: "NoIniciado",
+          estado: 'NoIniciado',
           usuario: {
             connect: {
               email: args.data.authorEmail,
-            }
+            },
           },
           proyecto: {
             connect: {
@@ -34,8 +34,7 @@ const bugResolvers: Resolver = {
             },
           },
         },
-      });
-    },
+      }),
     updateBug: async (parent, args) => {
       const bug = await prisma.bug.update({
         where: {

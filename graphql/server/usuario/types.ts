@@ -28,6 +28,7 @@ const usuarioTypes = gql`
     proyectos: [Proyecto]
     comentarios: [Comentario]
     bugs: [Bug]
+    respuestas: [Respuesta]
   }
 
   type Query {
