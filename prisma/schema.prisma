@@ -60,9 +60,9 @@ model Bug {
   prioridad   Enum_PrioridadBug
   estado      Enum_EstadoBug
   descripcion String
-  Usuario     Usuario           @relation(fields: [usuarioId], references: [id])
+  usuario     Usuario           @relation(fields: [usuarioId], references: [id])
   usuarioId   String
-  Proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
+  proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
   proyectoId  String
   comentarios Comentario[]
 
