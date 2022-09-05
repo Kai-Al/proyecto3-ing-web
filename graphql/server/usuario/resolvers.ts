@@ -3,8 +3,8 @@ import prisma from 'config/prisma';
 
 const usuarioResolvers: Resolver = {
   Usuario: {
-    proyectos: async (parent, args) => {
-      return await prisma.proyecto.findMany({
+    proyectos: async (parent, args) =>
+      await prisma.proyecto.findMany({
         where: {
           usuarios: {
             some: {
@@ -12,32 +12,30 @@ const usuarioResolvers: Resolver = {
             },
           },
         },
-      });
-    },
+      }),
   },
   Query: {
     obtenerUsuarios: async (parent, args) => {
       const usuario = await prisma.usuario.findMany();
       return usuario;
     },
-    obtenerUsuario: async (parent, args) => {
-      return await prisma.usuario.findUnique({
-          where: {
-              email: args.email
-          }
-      });
-    }
+    obtenerUsuario: async (parent, args) =>
+      await prisma.usuario.findUnique({
+        where: {
+          email: args.email,
+        },
+      }),
   },
   Mutation: {
-    setUsuario: async (parent, args) => {
-      return await prisma.usuario.create({
+    setUsuario: async (parent, args) =>
+      await prisma.usuario.create({
         data: {
           identificacion: args.data.identificacion,
           nombre: args.data.nombre,
           email: args.data.email,
           role: 'Cliente',
         },
-    });},
+      }),
     updateUsuario: async (parent, args) => {
       const usuario = await prisma.usuario.update({
         where: {
@@ -49,13 +47,12 @@ const usuarioResolvers: Resolver = {
       });
       return usuario;
     },
-    deleteUsuario: async (parent, args) => {
-      return await prisma.usuario.delete({
+    deleteUsuario: async (parent, args) =>
+      await prisma.usuario.delete({
         where: {
           email: args.email,
         },
-      });
-    },
+      }),
   },
 };
 
