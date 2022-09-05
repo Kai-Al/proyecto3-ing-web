@@ -1,31 +1,46 @@
-import { gql } from "apollo-server-micro";
+import { gql } from 'apollo-server-micro';
 
 const usuarioTypes = gql`
-    enum Enum_Role {
-        Administrador
-        Cliente
-        Desarrrollador
-    }
+  enum Enum_Role {
+    Administrador
+    Cliente
+    Desarrrollador
+  }
 
-    type Usuario {
-        id: ID
-        identificacion: String
-        nombre: String
-        email: String
-        isHabilitado: Boolean
-        role: Enum_Role
-        #proyectos: [Proyecto]
-        #comentarios: [Comentario]
-        #bugs: [Bug]
-    }
+  input UsuarioCreateInput {
+    identificacion: String!
+    nombre: String!
+    email: String!
+  }
 
-    type Query {
-        obtenerUsuarios: [Usuario]
-    }
+  input UsuarioUpdateInput {
+    nombre: String
+    email: String
+    role: Enum_Role
+  }
 
-    type Mutation {
-        setUsuario(identificacion: String!, nombre: String!, email: String!): Usuario
-    }
+  type Usuario {
+    id: ID
+    identificacion: String
+    nombre: String
+    email: String
+    role: Enum_Role
+    proyectos: [Proyecto]
+    comentarios: [Comentario]
+    bugs: [Bug]
+    respuestas: [Respuesta]
+  }
+
+  type Query {
+    obtenerUsuarios: [Usuario]
+    obtenerUsuario(email: String): Usuario
+  }
+
+  type Mutation {
+    setUsuario(data: UsuarioCreateInput): Usuario
+    updateUsuario(emailOriginal: String!, data: UsuarioUpdateInput): Usuario
+    deleteUsuario(email: String!): Usuario
+  }
 `;
 
 export { usuarioTypes };

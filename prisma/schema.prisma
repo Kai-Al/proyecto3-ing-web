@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,6 +5,69 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Bug {
+  id           String            @id @default(cuid())
+  prioridad    Enum_PrioridadBug
+  estado       Enum_EstadoBug
+  descripcion  String
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  proyectoId   String
+  usuarioId    String
+  carga        String?
+  proyecto     Proyecto          @relation(fields: [proyectoId], references: [id])
+  usuario      Usuario           @relation(fields: [usuarioId], references: [id])
+  comentarios  Comentario[]
+  isFinalizado Boolean           @default(false)
+}
+
+model Comentario {
+  id              String      @id @default(cuid())
+  textoComentario String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  bugId           String
+  usuarioId       String
+  Bug             Bug         @relation(fields: [bugId], references: [id])
+  Usuario         Usuario     @relation(fields: [usuarioId], references: [id])
+  Respuestas      Respuesta[]
+}
+
+model Proyecto {
+  id          String    @id @default(cuid())
+  nombre      String    @unique
+  descripcion String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  bugs        Bug[]
+  usuarios    Usuario[]
+}
+
+model Respuesta {
+  id             String     @id @default(cuid())
+  textoRespuesta String
+  usuarioId      String
+  comentarioId   String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  Comentario     Comentario @relation(fields: [comentarioId], references: [id])
+  Usuario        Usuario    @relation(fields: [usuarioId], references: [id])
+}
+
+model Usuario {
+  id             String       @id @default(cuid())
+  identificacion String       @unique
+  nombre         String
+  email          String       @unique
+  role           Enum_Role
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  bugs           Bug[]
+  comentarios    Comentario[]
+  respuestas     Respuesta[]
+  proyectos      Proyecto[]
 }
 
 enum Enum_Role {
@@ -28,61 +88,4 @@ enum Enum_EstadoBug {
   Iniciado
   EnPruebas
   Finalizado
-}
-
-model Usuario {
-  id             String       @id @default(cuid())
-  identificacion String       @unique
-  nombre         String
-  email          String       @unique
-  isHabilitado   Boolean
-  role           Enum_Role
-  proyectos      Proyecto[]
-  comentarios    Comentario[]
-  bugs           Bug[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Proyecto {
-  id          String    @id @default(cuid())
-  nombre      String    @unique
-  descripcion String
-  usuarios    Usuario[]
-  bugs        Bug[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Bug {
-  id          String            @id @default(cuid())
-  prioridad   Enum_PrioridadBug
-  estado      Enum_EstadoBug
-  descripcion String
-  Usuario     Usuario           @relation(fields: [usuarioId], references: [id])
-  usuarioId   String
-  Proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
-  proyectoId  String
-  comentarios Comentario[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Comentario {
-  id              String  @id @default(cuid())
-  textoComentario String
-  usuario         Usuario @relation(fields: [usuarioId], references: [id])
-  usuarioId       String
-  Bug             Bug     @relation(fields: [bugId], references: [id])
-  bugId           String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  respuestas   Comentario[] @relation("ComentarioRespuestas")
-  Comentario   Comentario?  @relation("ComentarioRespuestas", fields: [comentarioId], references: [id])
-  comentarioId String?
 }
