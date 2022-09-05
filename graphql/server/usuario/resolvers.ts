@@ -20,24 +20,24 @@ const usuarioResolvers: Resolver = {
       const usuario = await prisma.usuario.findMany();
       return usuario;
     },
+    obtenerUsuario: async (parent, args) => {
+      return await prisma.usuario.findUnique({
+          where: {
+              email: args.email
+          }
+      });
+    }
   },
   Mutation: {
     setUsuario: async (parent, args) => {
-      const usuario = await prisma.usuario.create({
+      return await prisma.usuario.create({
         data: {
           identificacion: args.data.identificacion,
           nombre: args.data.nombre,
           email: args.data.email,
           role: 'Cliente',
         },
-        obtenerUsuario: async (parent, args) => {
-            return await prisma.usuario.findUnique({
-                where: {
-                    email: args.email
-                }
-            });
-        }
-    },
+    });},
     updateUsuario: async (parent, args) => {
       const usuario = await prisma.usuario.update({
         where: {
