@@ -28,10 +28,11 @@ const bugTypes = gql`
     prioridad: Enum_PrioridadBug
     estado: Enum_EstadoBug
     usuario: Usuario
+    carga: String
     #usuarioId: String
     #proyectoId: String
     proyecto: Proyecto
-    comentarios: [Comentario]
+    #comentarios: [Comentario]
   }
 
   type Query {

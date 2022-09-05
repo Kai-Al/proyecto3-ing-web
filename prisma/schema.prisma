@@ -7,18 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
-  id             String       @id @default(cuid())
-  identificacion String       @unique
-  nombre         String
-  email          String       @unique
-  role           Enum_Role
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  bugs           Bug[]
-  comentarios    Comentario[]
-  Respuesta      Respuesta[]
-  proyectos      Proyecto[]
+model Bug {
+  id          String            @id @default(cuid())
+  prioridad   Enum_PrioridadBug
+  estado      Enum_EstadoBug
+  descripcion String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  proyectoId  String
+  usuarioId   String
+  carga       String?
+  proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
+  usuario     Usuario?          @relation(fields: [usuarioId], references: [id])
+  comentarios Comentario[]
+}
+
+model Comentario {
+  id              String      @id @default(cuid())
+  textoComentario String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  bugId           String
+  usuarioId       String
+  Bug             Bug         @relation(fields: [bugId], references: [id])
+  Usuario         Usuario     @relation(fields: [usuarioId], references: [id])
+  Respuestas      Respuesta[]
 }
 
 model Proyecto {
@@ -31,33 +44,6 @@ model Proyecto {
   usuarios    Usuario[]
 }
 
-model Bug {
-  id          String            @id @default(cuid())
-  prioridad   Enum_PrioridadBug
-  estado      Enum_EstadoBug
-  descripcion String
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  proyectoId  String
-  usuarioId   String
-  carga       String
-  proyecto    Proyecto          @relation(fields: [proyectoId], references: [id])
-  usuario     Usuario           @relation(fields: [usuarioId], references: [id])
-  comentarios Comentario[]
-}
-
-model Comentario {
-  id              String      @id @default(cuid())
-  textoComentario String
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
-  bugId           String
-  usuarioId       String
-  bug             Bug         @relation(fields: [bugId], references: [id])
-  usuario         Usuario     @relation(fields: [usuarioId], references: [id])
-  respuestas      Respuesta[]
-}
-
 model Respuesta {
   id             String     @id @default(cuid())
   textoRespuesta String
@@ -65,8 +51,22 @@ model Respuesta {
   comentarioId   String
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
-  comentario     Comentario @relation(fields: [comentarioId], references: [id])
-  usuario        Usuario    @relation(fields: [usuarioId], references: [id])
+  Comentario     Comentario @relation(fields: [comentarioId], references: [id])
+  Usuario        Usuario    @relation(fields: [usuarioId], references: [id])
+}
+
+model Usuario {
+  id             String       @id @default(cuid())
+  identificacion String       @unique
+  nombre         String
+  email          String       @unique
+  role           Enum_Role
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  bugs           Bug[]
+  comentarios    Comentario[]
+  respuestas     Respuesta[]
+  proyectos      Proyecto[]
 }
 
 enum Enum_Role {

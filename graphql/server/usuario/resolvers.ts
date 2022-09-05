@@ -3,16 +3,18 @@ import prisma from 'config/prisma';
 
 const usuarioResolvers: Resolver = {
   Usuario: {
-    proyectos: async (parent, args) =>
-      await prisma.proyecto.findMany({
+    proyectos: async (parent, args) =>{
+      console.log(parent);
+      return await prisma.proyecto.findMany({
         where: {
           usuarios: {
             some: {
-              id: parent.id,
-            },
-          },
+              
+            }
+          }
         },
-      }),
+      });
+    },
   },
   Query: {
     obtenerUsuarios: async (parent, args) => {
