@@ -35,10 +35,6 @@ const comentarioTypes = gql`
   type Mutation {
     crearComentario(data: CrearComentarioInput): Comentario
     actualizarComentario(data: ActualizarComentarioInput): Comentario
-    actualizarIdComentario(id: String): Comentario
-    actualizarTextoComentario(textoComentario: String): Comentario
-    actualizarBugIdComentario(bugId: String): Comentario
-    actualizarUsuarioIdComentario(usuarioId: String): Comentario
     eliminarComentario(id: String): Comentario
   }
 `;

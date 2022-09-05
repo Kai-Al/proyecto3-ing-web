@@ -56,58 +56,11 @@ const ComentarioResolvers: Resolver = {
       });
       return updateComentario;
     },
-    actualizarIdComentario: async (parent, args) => {
-      const updateIdComentario = await prisma.comentario.update({
-        where: {
-          id: args.data.id,
-        },
-        data: {
-          id: args.data.id,
-        },
-      });
-      return updateIdComentario;
-    },
-
-    actualizarTextoComentario: async (parent, args) => {
-      const updateTextoComentario = await prisma.comentario.update({
-        where: {
-          id: args.data.id,
-        },
-        data: {
-          textoComentario: args.data.textoComentario,
-        },
-      });
-      return updateTextoComentario;
-    },
-
-    actualizarBugIdComentario: async (parent, args) => {
-      const updateBugIdComentario = await prisma.comentario.update({
-        where: {
-          id: args.data.id,
-        },
-        data: {
-          bugId: args.data.bugId,
-        },
-      });
-      return updateBugIdComentario;
-    },
-
-    actualizarUsuarioIdComentario: async (parent, args) => {
-      const updateUsuarioIdComentario = await prisma.comentario.update({
-        where: {
-          id: args.data.id,
-        },
-        data: {
-          usuarioId: args.data.usuarioId,
-        },
-      });
-      return updateUsuarioIdComentario;
-    },
 
     eliminarComentario: async (parent, args) => {
       const eliminarComentario = await prisma.comentario.delete({
         where: {
-          id: args.data.id,
+          id: args.id,
         },
       });
       return eliminarComentario;
