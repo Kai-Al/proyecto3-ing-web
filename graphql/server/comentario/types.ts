@@ -16,14 +16,30 @@ const comentarioTypes = gql`
   }
 
   input CrearComentarioInput {
-    id: String
+    id: String!
+    textoComentario: String!
+    bugId: String!
+    usuarioId: String!
+  }
+
+  input ActualizarComentarioInput {
+    id: String!
+    textoComentario: String
+    bugId: String
+    usuarioId: String
   }
 
   type Query {
     obtenerComentario(id: String): Comentario
   }
   type Mutation {
-    random(identificacion: String!, nombre: String!): Usuario
+    crearComentario(data: CrearComentarioInput): Comentario
+    actualizarComentario(data: ActualizarComentarioInput): Comentario
+    actualizarIdComentario(id: String): Comentario
+    actualizarTextoComentario(textoComentario: String): Comentario
+    actualizarBugIdComentario(bugId: String): Comentario
+    actualizarUsuarioIdComentario(usuarioId: String): Comentario
+    eliminarComentario(id: String): Comentario
   }
 `;
 
