@@ -33,6 +33,7 @@ const bugResolvers: Resolver = {
               nombre: args.data.nameProyecto,
             },
           },
+          carga: 'Por asignar'
         },
       }),
     updateBug: async (parent, args) => {
