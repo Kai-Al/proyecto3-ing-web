@@ -19,7 +19,7 @@ const proyectoTypes = gql`
     nombre: String
     descripcion: String
     usuarios: [Usuario]
-    #bugs: [Bug]
+    bugs: [Bug]
   }
 
   type Query {

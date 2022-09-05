@@ -59,14 +59,14 @@ model Comentario {
 }
 
 model Respuesta {
-  id             String      @id @default(cuid())
+  id             String     @id @default(cuid())
   textoRespuesta String
   usuarioId      String
   comentarioId   String
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
-  comentario     Comentario? @relation(fields: [comentarioId], references: [id])
-  usuario        Usuario     @relation(fields: [usuarioId], references: [id])
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  comentario     Comentario @relation(fields: [comentarioId], references: [id])
+  usuario        Usuario    @relation(fields: [usuarioId], references: [id])
 }
 
 enum Enum_Role {

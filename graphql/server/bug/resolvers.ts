@@ -23,11 +23,11 @@ const bugResolvers: Resolver = {
           descripcion: args.data.descripcion,
           prioridad: args.data.prioridad,
           estado: 'NoIniciado',
-          usuario: {
+          /*usuario: {
             connect: {
               email: args.data.authorEmail,
             },
-          },
+          },*/
           proyecto: {
             connect: {
               nombre: args.data.nameProyecto,
