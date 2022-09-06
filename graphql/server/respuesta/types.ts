@@ -2,12 +2,10 @@ import { gql } from 'apollo-server-micro';
 
 const respuestaTypes = gql`
   type Respuesta {
-    id: ID!
+    id: ID
     textoRespuesta: String
     usuario: Usuario
-    usuarioId: String
     comentario: Comentario
-    comentarioId: String
     createdAt: Date
     updatedAt: Date
   }
@@ -15,7 +13,7 @@ const respuestaTypes = gql`
   input CrearRespuestaInput {
     textoRespuesta: String!
     comentarioId: String!
-    usuarioId: String!
+    emailAuthor: String!
   }
 
   input ActualizarRespuestaInput {

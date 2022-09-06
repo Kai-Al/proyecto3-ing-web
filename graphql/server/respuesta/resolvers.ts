@@ -11,6 +11,14 @@ const RespuestaResolvers: Resolver = {
       });
       return usuario;
     },
+    comentario: async (parent, args) => {
+      const comentario = await prisma.comentario.findUnique({
+        where: {
+          id: parent.comentarioId,
+        },
+      });
+      return comentario;
+    }
   },
   Query: {
     obtenerRespuesta: async (parent, args) => {
@@ -28,8 +36,16 @@ const RespuestaResolvers: Resolver = {
         data: {
           id: args.data.id,
           textoRespuesta: args.data.textoRespuesta,
-          comentarioId: args.data.comentarioId,
-          usuarioId: args.data.usuarioId,
+          Comentario: {
+            connect: {
+              id: args.data.comentarioId,
+            }
+          },
+          Usuario: {
+            connect: {
+              email: args.data.emailAuthor,
+            }
+          },
         },
       });
       return newRespuesta;

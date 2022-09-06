@@ -25,6 +25,9 @@ const bugTypes = gql`
     id: String
     descripcion: String
     prioridad: Enum_PrioridadBug
+    estado: Enum_EstadoBug
+    usuario: String
+    carga: String
     isFinalizado: Boolean
   }
 
@@ -36,10 +39,8 @@ const bugTypes = gql`
     usuario: Usuario
     carga: String
     isFinalizado: Boolean
-    #usuarioId: String
-    #proyectoId: String
     proyecto: Proyecto
-    #comentarios: [Comentario]
+    comentarios: [Comentario]
   }
 
   type Query {
@@ -49,7 +50,7 @@ const bugTypes = gql`
 
   type Mutation {
     setBug(data: BugCreateInput): Bug
-    updateBugCliente(data: BugUpdateClienteInput): Bug
+    updateBug (data: BugUpdateClienteInput): Bug
     deleteBug(id: String): Bug
   }
 `;

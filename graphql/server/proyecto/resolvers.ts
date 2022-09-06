@@ -13,6 +13,16 @@ const proyectoResolvers: Resolver = {
         .usuarios();
       return usuarios;
     },
+    bugs: async (parent, args) => {
+      const bugs = await prisma.proyecto
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .bugs();
+      return bugs;
+    }
   },
   Query: {
     obtenerProyectos: async (parent, args) => {

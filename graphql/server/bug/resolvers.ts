@@ -17,6 +17,13 @@ const bugResolvers: Resolver = {
         },
       }).usuario();
     },
+    comentarios: async (parent) => {
+      return await prisma.bug.findUnique({
+        where: {
+          id: parent.id,
+        },
+      }).comentarios();
+    },
   },
   Query: {
     obtenerBugs: async (parent, args) => {
@@ -48,18 +55,25 @@ const bugResolvers: Resolver = {
             connect: {
               nombre: args.data.nameProyecto,
             },
-          },
-          carga: '',
-          
+          },          
         },
       }),
-    updateBugCliente: async (parent, args) => {
+    updateBug: async (parent, args) => {
       const bug = await prisma.bug.update({
         where: {
           id: args.data.id,
         },
         data: {
-          ...args.data
+          descripcion: args.data.descripcion,
+          prioridad: args.data.prioridad,
+          estado: args.data.estado,
+          usuario: {
+            connect: {
+              email: args.data.usuario,
+            },
+          },
+          carga: args.data.carga,
+          isFinalizado: args.data.isFinalizado,
         },
       });
       return bug;

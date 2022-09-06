@@ -2,23 +2,19 @@ import { gql } from 'apollo-server-micro';
 
 const comentarioTypes = gql`
   type Comentario {
-    id: ID!
+    id: ID
     textoComentario: String
     usuario: Usuario
-    usuarioId: String
     bug: Bug
-    bugId: String
     createdAt: Date
     updatedAt: Date
-    respuestas: [Comentario]
-    comentario: Comentario
-    comentarioId: String
+    respuestas: [Respuesta]
   }
 
   input CrearComentarioInput {
     textoComentario: String!
     bugId: String!
-    usuarioId: String!
+    emailAuthor: String!
   }
 
   input ActualizarComentarioInput {
@@ -29,6 +25,7 @@ const comentarioTypes = gql`
   }
 
   type Query {
+    obtenerComentarios: [Comentario]
     obtenerComentario(id: String): Comentario
   }
   type Mutation {

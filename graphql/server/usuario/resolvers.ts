@@ -4,7 +4,6 @@ import prisma from 'config/prisma';
 const usuarioResolvers: Resolver = {
   Usuario: {
     proyectos: async (parent, args) =>{
-      console.log(parent);
       return await prisma.proyecto.findMany({
         where: {
           usuarios: {
@@ -12,6 +11,27 @@ const usuarioResolvers: Resolver = {
               id: parent.id
             }
           }
+        },
+      });
+    },
+    comentarios: async (parent, args) =>{ 
+      return await prisma.comentario.findMany({
+        where: {
+          usuarioId: parent.id
+        },
+      });
+    },
+    bugs: async (parent, args) =>{
+      return await prisma.bug.findMany({
+        where: {
+          usuarioId: parent.id
+        },
+      });
+    },
+    respuestas: async (parent, args) =>{
+      return await prisma.respuesta.findMany({
+        where: {
+          usuarioId: parent.id
         },
       });
     },

@@ -19,8 +19,20 @@ const ComentarioResolvers: Resolver = {
       });
       return bug;
     },
+    respuestas: async (parent, args) => {
+      const respuestas = await prisma.respuesta.findMany({
+        where: {
+          comentarioId: parent.id,
+        },
+      });
+      return respuestas;
+    }
   },
   Query: {
+    obtenerComentarios: async (parent, args) => {
+      const comentarios = await prisma.comentario.findMany();
+      return comentarios;
+    },
     obtenerComentario: async (parent, args) => {
       const comentario = await prisma.comentario.findUnique({
         where: {
@@ -34,10 +46,17 @@ const ComentarioResolvers: Resolver = {
     crearComentario: async (parent, args) => {
       const newComentario = await prisma.comentario.create({
         data: {
-          id: args.data.id,
           textoComentario: args.data.textoComentario,
-          bugId: args.data.bugId,
-          usuarioId: args.data.usuarioId,
+          Bug: {
+            connect: {
+              id: args.data.bugId,
+            }
+          },
+          Usuario: {
+            connect: {
+              email: args.data.emailAuthor,
+            }
+          },
         },
       });
       return newComentario;
