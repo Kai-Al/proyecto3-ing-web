@@ -4,8 +4,8 @@ const comentarioTypes = gql`
   type Comentario {
     id: ID
     textoComentario: String
-    usuario: Usuario
-    bug: Bug
+    Usuario: Usuario
+    Bug: Bug
     createdAt: Date
     updatedAt: Date
     respuestas: [Respuesta]

@@ -47,12 +47,12 @@ const ComentarioResolvers: Resolver = {
       const newComentario = await prisma.comentario.create({
         data: {
           textoComentario: args.data.textoComentario,
-          bug: {
+          Bug: {
             connect: {
               id: args.data.bugId,
             },
           },
-          usuario: {
+          Usuario: {
             connect: {
               email: args.data.emailAuthor,
             },
