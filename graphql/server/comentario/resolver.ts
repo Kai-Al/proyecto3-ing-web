@@ -3,7 +3,7 @@ import { Resolver } from 'types';
 
 const ComentarioResolvers: Resolver = {
   Comentario: {
-    usuario: async (parent, args) => {
+    Usuario: async (parent, args) => {
       const usuario = await prisma.usuario.findUnique({
         where: {
           id: parent.usuarioId,
@@ -11,7 +11,7 @@ const ComentarioResolvers: Resolver = {
       });
       return usuario;
     },
-    bug: async (parent, args) => {
+    Bug: async (parent, args) => {
       const bug = await prisma.bug.findUnique({
         where: {
           id: parent.bugId,
