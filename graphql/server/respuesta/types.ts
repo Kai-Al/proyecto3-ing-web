@@ -4,8 +4,8 @@ const respuestaTypes = gql`
   type Respuesta {
     id: ID
     textoRespuesta: String
-    usuario: Usuario
-    comentario: Comentario
+    Usuario: Usuario
+    Comentario: Comentario
     createdAt: Date
     updatedAt: Date
   }

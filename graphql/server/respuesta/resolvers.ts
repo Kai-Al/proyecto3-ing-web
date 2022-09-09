@@ -3,7 +3,7 @@ import { Resolver } from 'types';
 
 const RespuestaResolvers: Resolver = {
   Respuesta: {
-    usuario: async (parent, args) => {
+    Usuario: async (parent, args) => {
       const usuario = await prisma.usuario.findUnique({
         where: {
           id: parent.usuarioId,
@@ -11,7 +11,7 @@ const RespuestaResolvers: Resolver = {
       });
       return usuario;
     },
-    comentario: async (parent, args) => {
+    Comentario: async (parent, args) => {
       const comentario = await prisma.comentario.findUnique({
         where: {
           id: parent.comentarioId,
@@ -36,12 +36,12 @@ const RespuestaResolvers: Resolver = {
         data: {
           id: args.data.id,
           textoRespuesta: args.data.textoRespuesta,
-          comentario: {
+          Comentario: {
             connect: {
               id: args.data.comentarioId,
             },
           },
-          usuario: {
+          Usuario: {
             connect: {
               email: args.data.emailAuthor,
             },
