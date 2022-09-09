@@ -13,7 +13,7 @@ const proyectoTypes = gql`
     newUsers: [String]
     firedUsers: [String]
   }
-  
+
   type Proyecto {
     id: ID
     nombre: String
@@ -23,14 +23,14 @@ const proyectoTypes = gql`
   }
 
   type Query {
-    obtenerProyectos: [Proyecto],
-    obtenerProyecto(nombre: String!): Proyecto,
+    obtenerProyectos: [Proyecto]
+    obtenerProyecto(nombre: String!): Proyecto
   }
 
   type Mutation {
-    setProyecto(data: ProyectoCreateInput): Proyecto,
-    deleteProyecto(nombre: String!): Proyecto,
-    updateProyecto(name:String!, data: ProyectoUpdateInput): Proyecto,
+    setProyecto(data: ProyectoCreateInput): Proyecto
+    deleteProyecto(nombre: String!): Proyecto
+    updateProyecto(name: String!, data: ProyectoUpdateInput): Proyecto
   }
 `;
 

@@ -18,7 +18,7 @@ const RespuestaResolvers: Resolver = {
         },
       });
       return comentario;
-    }
+    },
   },
   Query: {
     obtenerRespuesta: async (parent, args) => {
@@ -36,15 +36,15 @@ const RespuestaResolvers: Resolver = {
         data: {
           id: args.data.id,
           textoRespuesta: args.data.textoRespuesta,
-          Comentario: {
+          comentario: {
             connect: {
               id: args.data.comentarioId,
-            }
+            },
           },
-          Usuario: {
+          usuario: {
             connect: {
               email: args.data.emailAuthor,
-            }
+            },
           },
         },
       });

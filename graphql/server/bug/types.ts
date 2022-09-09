@@ -50,7 +50,7 @@ const bugTypes = gql`
 
   type Mutation {
     setBug(data: BugCreateInput): Bug
-    updateBug (data: BugUpdateClienteInput): Bug
+    updateBug(data: BugUpdateClienteInput): Bug
     deleteBug(id: String): Bug
   }
 `;

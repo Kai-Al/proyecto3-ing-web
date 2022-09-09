@@ -26,7 +26,7 @@ const ComentarioResolvers: Resolver = {
         },
       });
       return respuestas;
-    }
+    },
   },
   Query: {
     obtenerComentarios: async (parent, args) => {
@@ -47,15 +47,15 @@ const ComentarioResolvers: Resolver = {
       const newComentario = await prisma.comentario.create({
         data: {
           textoComentario: args.data.textoComentario,
-          Bug: {
+          bug: {
             connect: {
               id: args.data.bugId,
-            }
+            },
           },
-          Usuario: {
+          usuario: {
             connect: {
               email: args.data.emailAuthor,
-            }
+            },
           },
         },
       });

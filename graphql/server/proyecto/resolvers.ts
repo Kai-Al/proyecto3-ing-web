@@ -22,7 +22,7 @@ const proyectoResolvers: Resolver = {
         })
         .bugs();
       return bugs;
-    }
+    },
   },
   Query: {
     obtenerProyectos: async (parent, args) => {
@@ -52,7 +52,7 @@ const proyectoResolvers: Resolver = {
       });
       return nuevoProyecto;
     },
-    deleteProyecto: async (parent, args) =>{
+    deleteProyecto: async (parent, args) => {
       const proyecto = await prisma.proyecto.delete({
         where: {
           nombre: args.nombre,

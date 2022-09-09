@@ -3,27 +3,30 @@ import prisma from 'config/prisma';
 
 const bugResolvers: Resolver = {
   Bug: {
-    proyecto: async (parent) => {
-      return await prisma.bug.findUnique({
-        where: {
-          id: parent.id,
-        },
-      }).proyecto();
-    },
-    usuario: async (parent) => {
-      return await prisma.bug.findUnique({
-        where: {
-          id: parent.id,
-        },
-      }).usuario();
-    },
-    comentarios: async (parent) => {
-      return await prisma.bug.findUnique({
-        where: {
-          id: parent.id,
-        },
-      }).comentarios();
-    },
+    proyecto: async parent =>
+      await prisma.bug
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .proyecto(),
+    usuario: async parent =>
+      await prisma.bug
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .usuario(),
+    comentarios: async parent =>
+      await prisma.bug
+        .findUnique({
+          where: {
+            id: parent.id,
+          },
+        })
+        .comentarios(),
   },
   Query: {
     obtenerBugs: async (parent, args) => {
@@ -48,14 +51,14 @@ const bugResolvers: Resolver = {
           estado: 'NoIniciado',
           usuario: {
             connect: {
-              email: "NULL"
-            }
+              email: 'NULL',
+            },
           },
           proyecto: {
             connect: {
               nombre: args.data.nameProyecto,
             },
-          },          
+          },
         },
       }),
     updateBug: async (parent, args) => {
