@@ -18,6 +18,7 @@ CREATE TABLE "Bug" (
     "proyectoId" TEXT NOT NULL,
     "usuarioId" TEXT NOT NULL,
     "carga" TEXT,
+    "isFinalizado" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Bug_pkey" PRIMARY KEY ("id")
 );
@@ -92,19 +93,19 @@ CREATE UNIQUE INDEX "_ProyectoToUsuario_AB_unique" ON "_ProyectoToUsuario"("A", 
 CREATE INDEX "_ProyectoToUsuario_B_index" ON "_ProyectoToUsuario"("B");
 
 -- AddForeignKey
-ALTER TABLE "Bug" ADD CONSTRAINT "Bug_proyectoId_fkey" FOREIGN KEY ("proyectoId") REFERENCES "Proyecto"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Bug" ADD CONSTRAINT "Bug_proyectoId_fkey" FOREIGN KEY ("proyectoId") REFERENCES "Proyecto"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Bug" ADD CONSTRAINT "Bug_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_bugId_fkey" FOREIGN KEY ("bugId") REFERENCES "Bug"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_bugId_fkey" FOREIGN KEY ("bugId") REFERENCES "Bug"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Comentario" ADD CONSTRAINT "Comentario_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Respuesta" ADD CONSTRAINT "Respuesta_comentarioId_fkey" FOREIGN KEY ("comentarioId") REFERENCES "Comentario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Respuesta" ADD CONSTRAINT "Respuesta_comentarioId_fkey" FOREIGN KEY ("comentarioId") REFERENCES "Comentario"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Respuesta" ADD CONSTRAINT "Respuesta_usuarioId_fkey" FOREIGN KEY ("usuarioId") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
