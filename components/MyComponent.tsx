@@ -3,24 +3,46 @@ import { GET_MOCK_MODEL } from '@graphql/client/queries/getMockModel';
 import React from 'react';
 import Loading from '@components/Loading';
 import { MockModel } from 'types';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 const MyComponent = () => {
   const { data, loading } = useQuery(GET_MOCK_MODEL);
+  const { status } = useSession();
 
   if (loading) return <Loading />;
   return (
-    <div className='p-10'>
-      <h1>Data fetched with GraphQL</h1>
-      <div className='flex gap-3'>
-        {data.mockModelGetter.map((el: MockModel) => (
-          <div className='bg-gray-200 p-4 flex flex-col items-center rounded-lg shadow-lg'>
-            <span>{el.id}</span>
-            <span>{el.name}</span>
-            <span>{el.description}</span>
-          </div>
-        ))}
+    <>
+      <div className='flex flex-col'>
+        <div className='flex'>
+          {status === 'unauthenticated' && (
+            <button
+              type='button'
+              className='primary'
+              onClick={() => signIn('auth0')}
+            >
+              Iniciar Sesión
+            </button>
+          )}
+          {status === 'authenticated' && (
+            <button type='button' className='primary' onClick={() => signOut()}>
+              Cerrar Sesión
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+      <div className='p-10'>
+        <h1>Data fetched with GraphQL</h1>
+        <div className='flex gap-3'>
+          {data.mockModelGetter.map((el: MockModel) => (
+            <div className='bg-gray-200 p-4 flex flex-col items-center rounded-lg shadow-lg'>
+              <span>{el.id}</span>
+              <span>{el.name}</span>
+              <span>{el.description}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
