@@ -34,11 +34,11 @@ const usuarioResolvers: Resolver = {
   },
   Query: {
     obtenerUsuarios: async (parent, args) => {
-      const usuario = await prisma.usuario.findMany();
+      const usuario = await prisma.user.findMany();
       return usuario;
     },
     obtenerUsuario: async (parent, args) =>
-      await prisma.usuario.findUnique({
+      await prisma.user.findUnique({
         where: {
           email: args.email,
         },
@@ -46,7 +46,7 @@ const usuarioResolvers: Resolver = {
   },
   Mutation: {
     updateUsuario: async (parent, args) => {
-      const usuario = await prisma.usuario.update({
+      const usuario = await prisma.user.update({
         where: {
           email: args.emailOriginal,
         },
@@ -57,7 +57,7 @@ const usuarioResolvers: Resolver = {
       return usuario;
     },
     deleteUsuario: async (parent, args) =>
-      await prisma.usuario.delete({
+      await prisma.user.delete({
         where: {
           email: args.email,
         },
