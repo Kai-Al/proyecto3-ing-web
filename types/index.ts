@@ -1,7 +1,8 @@
+import { Session } from 'next-auth';
 import { NextApiRequest } from 'next/types';
 
 export interface Context {
-  //   session: Session;
+  session: Session;
   req: NextApiRequest;
 }
 

@@ -8,7 +8,6 @@ const usuarioTypes = gql`
   }
 
   input UsuarioCreateInput {
-    identificacion: String!
     nombre: String!
     email: String!
   }
@@ -21,7 +20,6 @@ const usuarioTypes = gql`
 
   type Usuario {
     id: ID
-    identificacion: String
     nombre: String
     email: String
     role: Enum_Role

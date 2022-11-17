@@ -29,12 +29,14 @@ const proyectoResolvers: Resolver = {
       const proyecto = await prisma.proyecto.findMany();
       return proyecto;
     },
-    obtenerProyecto: async (parent, args) =>
-      await prisma.proyecto.findUnique({
+    obtenerProyecto: async (parent, args) => {
+      const proyecto = await prisma.proyecto.findUnique({
         where: {
-          nombre: args.nombre,
+          id: args.id,
         },
-      }),
+      });
+      return proyecto;
+    },
   },
 
   Mutation: {
@@ -68,12 +70,12 @@ const proyectoResolvers: Resolver = {
           },
         })
         .usuarios();
-      let usuariosEmails = usuarios.map(usuario => usuario.email);
+      let usuariosEmails = usuarios.map((usuario) => usuario.email);
 
       if (args.data !== undefined) {
         if (args.data.firedUsers) {
           usuariosEmails = usuariosEmails.filter(
-            email => !args.data.firedUsers.includes(email)
+            (email) => !args.data.firedUsers.includes(email)
           );
         }
         if (args.data.newUsers) {
@@ -88,7 +90,7 @@ const proyectoResolvers: Resolver = {
           nombre: args.data.nombre,
           descripcion: args.data.descripcion,
           usuarios: {
-            set: usuariosEmails.map(email => ({ email })),
+            set: usuariosEmails.map((email) => ({ email })),
           },
         },
       });

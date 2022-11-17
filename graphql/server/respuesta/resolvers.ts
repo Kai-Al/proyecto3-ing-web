@@ -4,7 +4,7 @@ import { Resolver } from 'types';
 const RespuestaResolvers: Resolver = {
   Respuesta: {
     Usuario: async (parent, args) => {
-      const usuario = await prisma.usuario.findUnique({
+      const usuario = await prisma.user.findUnique({
         where: {
           id: parent.usuarioId,
         },

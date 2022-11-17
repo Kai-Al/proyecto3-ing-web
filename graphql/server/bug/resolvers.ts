@@ -3,7 +3,7 @@ import prisma from 'config/prisma';
 
 const bugResolvers: Resolver = {
   Bug: {
-    proyecto: async parent =>
+    proyecto: async (parent) =>
       await prisma.bug
         .findUnique({
           where: {
@@ -11,7 +11,7 @@ const bugResolvers: Resolver = {
           },
         })
         .proyecto(),
-    usuario: async parent =>
+    usuario: async (parent) =>
       await prisma.bug
         .findUnique({
           where: {
@@ -19,7 +19,7 @@ const bugResolvers: Resolver = {
           },
         })
         .usuario(),
-    comentarios: async parent =>
+    comentarios: async (parent) =>
       await prisma.bug
         .findUnique({
           where: {
