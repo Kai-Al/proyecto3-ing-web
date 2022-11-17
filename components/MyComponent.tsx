@@ -39,18 +39,6 @@ const MyComponent = () => {
           </div>
         </div>
       </PrivateComponent>
-      <div className='p-10'>
-        <h1>Data fetched with GraphQL</h1>
-        <div className='flex gap-3'>
-          {data.mockModelGetter.map((el: MockModel) => (
-            <div className='bg-gray-200 p-4 flex flex-col items-center rounded-lg shadow-lg'>
-              <span>{el.id}</span>
-              <span>{el.name}</span>
-              <span>{el.description}</span>
-            </div>
-          ))}
-        </div>
-      </div>
     </>
   );
 };

@@ -1,12 +1,12 @@
-import MyComponent from '@components/MyComponent';
+import NavBar from '@components/NavBar';
+import TableProyectos from '@components/TableProyectos';
 import { NextPage } from 'next/types';
 
 const Home: NextPage = () => (
   <>
-    <div className='text-indigo-500'>
-      NextJS Boilerplate with Tailwind and GraphQL
-    </div>
-    <MyComponent />
+    <NavBar />
+    <h1 className='py-4 text-3xl text-center font-bold'>Proyectos</h1>
+    <TableProyectos />
   </>
 );
 
