@@ -1,4 +1,8 @@
-const Button = ({ children }) => (
+interface ButtonProps {
+  children: JSX.Element;
+}
+
+const Button = ({ children }: ButtonProps) => (
   <div>
     <button
       type='button'

@@ -90,7 +90,7 @@ const proyectoResolvers: Resolver = {
           nombre: args.data.nombre,
           descripcion: args.data.descripcion,
           usuarios: {
-            set: usuariosEmails.map((email) => ({ email })),
+            set: usuariosEmails.map((email) => ({ email: String(email) })),
           },
         },
       });
