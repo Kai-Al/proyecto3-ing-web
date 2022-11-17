@@ -1,10 +1,12 @@
-import Button from './Button';
+import Button from 'components/Button';
 
 const TableProyectos = () => (
   <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
     <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
       <div className='flex flex-row gap-1 place-content-end'>
-        <Button>Nuevo proyecto</Button>
+        <Button>
+          <a>Nuevo proyecto</a>
+        </Button>
       </div>
       <table>
         <thead>
@@ -29,9 +31,15 @@ const TableProyectos = () => (
             </td>
             <td className='px-4 py-2'>
               <div className='flex flex-row place-content-center gap-1'>
-                <Button>ver</Button>
-                <Button>editar</Button>
-                <Button>eliminar</Button>
+                <Button>
+                  <a>Ver</a>
+                </Button>
+                <Button>
+                  <a>Editar</a>
+                </Button>
+                <Button>
+                  <a>Eliminar</a>
+                </Button>
               </div>
             </td>
           </tr>

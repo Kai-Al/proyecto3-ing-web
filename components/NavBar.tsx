@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import Link from 'next/link';
-import Button from './Button';
+import Button from 'components/Button';
 
 const NavBar = () => {
   const { status } = useSession();
