@@ -6,7 +6,7 @@ import prisma from '@config/prisma';
 
 const options: NextAuthOptions = {
   callbacks: {
-    session: async ({ session, user, token }: any) => {
+    session: async ({ session, user }: any) => {
       const enrichedUser = await prisma.user.findUnique({
         where: {
           email: user.email ?? '',

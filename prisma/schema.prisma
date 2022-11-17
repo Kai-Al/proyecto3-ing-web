@@ -89,7 +89,6 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  usuarioId     String
   accounts      Account[]
   sessions      Session[]
 
@@ -98,12 +97,11 @@ model User {
   respuestas  Respuesta[]
   proyectos   Proyecto[]
 
-  role Enum_Role
+  role    Enum_Role
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-
 
 enum Enum_Role {
   Administrador
