@@ -20,7 +20,7 @@ const usuarioTypes = gql`
 
   type Usuario {
     id: ID
-    nombre: String
+    name: String
     email: String
     role: Enum_Role
     proyectos: [Proyecto]
