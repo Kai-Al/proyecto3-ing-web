@@ -4,6 +4,8 @@ import React from 'react';
 import Loading from '@components/Loading';
 import { MockModel } from 'types';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { Enum_Role } from '@prisma/client';
+import PrivateComponent from 'components/PrivateComponent';
 
 const MyComponent = () => {
   const { data, loading } = useQuery(GET_MOCK_MODEL);
@@ -30,6 +32,13 @@ const MyComponent = () => {
           )}
         </div>
       </div>
+      <PrivateComponent roleList={[Enum_Role.Administrador]}>
+        <div className='flex flex-col'>
+          <div className='flex'>
+            <h1>Hola</h1>
+          </div>
+        </div>
+      </PrivateComponent>
       <div className='p-10'>
         <h1>Data fetched with GraphQL</h1>
         <div className='flex gap-3'>

@@ -18,7 +18,7 @@ model Bug {
   usuarioId    String
   carga        String?
   proyecto     Proyecto          @relation(fields: [proyectoId], references: [id], onDelete: Cascade)
-  usuario      Usuario?          @relation(fields: [usuarioId], references: [id])
+  usuario      User?             @relation(fields: [usuarioId], references: [id])
   comentarios  Comentario[]
   isFinalizado Boolean           @default(false)
 }
@@ -31,18 +31,18 @@ model Comentario {
   bugId           String
   usuarioId       String
   Bug             Bug         @relation(fields: [bugId], references: [id], onDelete: Cascade)
-  Usuario         Usuario     @relation(fields: [usuarioId], references: [id])
+  Usuario         User        @relation(fields: [usuarioId], references: [id])
   Respuestas      Respuesta[]
 }
 
 model Proyecto {
-  id          String    @id @default(cuid())
-  nombre      String    @unique
+  id          String   @id @default(cuid())
+  nombre      String   @unique
   descripcion String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   bugs        Bug[]
-  usuarios    Usuario[]
+  usuarios    User[]
 }
 
 model Respuesta {
@@ -53,21 +53,22 @@ model Respuesta {
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
   Comentario     Comentario @relation(fields: [comentarioId], references: [id], onDelete: Cascade)
-  Usuario        Usuario    @relation(fields: [usuarioId], references: [id])
+  Usuario        User       @relation(fields: [usuarioId], references: [id])
 }
+
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -88,26 +89,21 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  usuarioId     String
   accounts      Account[]
   sessions      Session[]
-  usuario       Usuario[] //TODO revisar
+
+  bugs        Bug[]
+  comentarios Comentario[]
+  respuestas  Respuesta[]
+  proyectos   Proyecto[]
+
+  role Enum_Role
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-model Usuario {
-  id             String       @id @default(cuid())
-  identificacion String       @unique
-  nombre         String
-  email          String       @unique
-  role           Enum_Role
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  bugs           Bug[]
-  comentarios    Comentario[]
-  respuestas     Respuesta[]
-  proyectos      Proyecto[]
-  userId         String
-  user         User     @relation(fields: [userId], references: [id]) //TODO revisar
-}
 
 enum Enum_Role {
   Administrador
