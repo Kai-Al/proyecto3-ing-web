@@ -97,10 +97,10 @@ model User {
   respuestas  Respuesta[]
   proyectos   Proyecto[]
 
-  role    Enum_Role
+  role Enum_Role @default(Cliente)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 enum Enum_Role {
