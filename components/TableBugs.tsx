@@ -3,8 +3,7 @@ import Button from 'components/Button';
 const TableBugs = ({ nombre, bugs }) => (
   <>
     <div className='flex flex-row py-4 text-3xl text-center justify-center'>
-      <h1>Bugs del proyecto</h1>
-      <h1 className='font-bold ml-4'>{nombre}</h1>
+      <h1>Bugs del proyecto </h1>
     </div>
 
     <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
