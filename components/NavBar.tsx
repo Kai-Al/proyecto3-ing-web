@@ -10,6 +10,11 @@ const NavBar = () => {
     <div className='bg-blue-500'>
       <nav>
         <div className='p-4 gap-3 flex flex-row place-content-end'>
+          <Button>
+              <Link href='/'>
+                <a>Home</a>
+              </Link>
+            </Button>
           {status === 'authenticated' && (
             <Button>
               <Link href='/proyectos'>

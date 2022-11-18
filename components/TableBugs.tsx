@@ -1,15 +1,22 @@
 import Button from 'components/Button';
-import Link from 'next/link';
 
-const TableProyectos = ({ proyectos }) => {
-  console.log('hola DATA');
+const TableBugs = ({ nombre, bugs }) => (
+  <>
+    <div className='flex flex-row py-4 text-3xl text-center justify-center'>
+      <h1>Bugs del proyecto</h1>
+      <h1 className='font-bold ml-4'>{nombre}</h1>
+      <h1>HOOLA</h1>
+    </div>
 
-  return (
+    {bugs.map((bug) => (
+      <h1>{bug.descripcion}</h1>
+    ))}
+
     <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
       <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
         <div className='flex flex-row gap-1 place-content-end'>
           <Button>
-            <a>Nuevo proyecto</a>
+            <a>Agregar nuevo bug</a>
           </Button>
         </div>
         <table>
@@ -36,16 +43,7 @@ const TableProyectos = ({ proyectos }) => {
               <td className='px-4 py-2'>
                 <div className='flex flex-row place-content-center gap-1'>
                   <Button>
-                    <Link
-                      href={{
-                        pathname: `/resumenProyecto`,
-                        query: {
-                          id: proyectos.obtenerProyectos[0].id,
-                        },
-                      }}
-                    >
-                      <a>Ver</a>
-                    </Link>
+                    <a>Ver</a>
                   </Button>
                   <Button>
                     <a>Editar</a>
@@ -60,7 +58,7 @@ const TableProyectos = ({ proyectos }) => {
         </table>
       </div>
     </div>
-  );
-};
+  </>
+);
 
-export default TableProyectos;
+export default TableBugs;
