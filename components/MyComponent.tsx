@@ -2,13 +2,12 @@ import { useQuery } from '@apollo/client';
 import { GET_MOCK_MODEL } from '@graphql/client/queries/getMockModel';
 import React from 'react';
 import Loading from '@components/Loading';
-import { MockModel } from 'types';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { Enum_Role } from '@prisma/client';
 import PrivateComponent from 'components/PrivateComponent';
 
 const MyComponent = () => {
-  const { data, loading } = useQuery(GET_MOCK_MODEL);
+  const { loading } = useQuery(GET_MOCK_MODEL);
   const { status } = useSession();
 
   if (loading) return <Loading />;
