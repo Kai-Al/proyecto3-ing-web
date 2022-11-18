@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import FormUsuarios from '@components/FormUsuario';
 
 const Home: NextPage = () => {
-  const { status } = useSession();
+  const { data, status } = useSession();
 
   return (
     <>
@@ -16,7 +16,12 @@ const Home: NextPage = () => {
       )}
       {status === 'authenticated' && (
         <div>
-          <h1 className='py-4 text-3xl text-center font-bold'>Usuario</h1>
+          <div>
+            <h1 className='py-4 text-3xl text-center font-bold'>Usuario</h1>
+            <h1 className='py-4 text-3xl text-center font-bold'>
+              {data.user.name}
+            </h1>
+          </div>
           <div className='max-w-xs mx-auto sm:px-6 lg:px-8'>
             <FormUsuarios />
           </div>
