@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Button from 'components/Button';
 
 const TableProyectos = ({ usuarios }) => (
@@ -5,7 +6,9 @@ const TableProyectos = ({ usuarios }) => (
     <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
       <div className='flex flex-row gap-1 place-content-end'>
         <Button>
-          <a>Nuevo usuario</a>
+          <Link href='/newUsuario'>
+            <a>Nuevo usuario</a>
+          </Link>
         </Button>
       </div>
       <table>
