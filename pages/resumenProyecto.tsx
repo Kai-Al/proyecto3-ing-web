@@ -4,9 +4,10 @@ import { useSession } from 'next-auth/react';
 import { GET_PROYECTO } from '@graphql/client/queries/getProyecto';
 import { useQuery } from '@apollo/client';
 import TableBugs from '@components/TableBugs';
+import { useEffect } from "react";
 
 export async function getServerSideProps(context) {
-  console.log("ID PROYECTO",context.query.id)
+  console.log('ID PROYECTO', context.query.id);
   return {
     props: {
       id: context.query.id,
@@ -16,33 +17,45 @@ export async function getServerSideProps(context) {
 
 const ResumenProyecto: NextPage<{ id: String }> = ({ id }) => {
   const { status } = useSession();
-  
-  const { data } = useQuery(GET_PROYECTO, {
+
+  const { data, loading } = useQuery(GET_PROYECTO, {
     variables: {
       id,
     },
   });
-  console.log(data)
+  console.log(data);
 
-  const { descripcion, nombre, usuarios, bugs } = data.obtenerProyecto;
+  useEffect(() => {
+    console.log('data: ', data);
+  }, [data]);
 
+  if (!loading) {
+    const { descripcion, nombre, usuarios, bugs } = data.obtenerProyecto;
+    return (
+      <>
+        <NavBar />
+        {status === 'authenticated' && (
+          <div>
+            <h1 className='py-4 text-3xl text-center font-bold'>
+              Resumen del proyecto
+            </h1>
+            <TableBugs nombre={nombre} bugs={bugs} />
+          </div>
+        )}
+        {status === 'unauthenticated' && (
+          <div>
+            <h1 className='py-4 text-3xl text-center font-bold'>
+              Unauthorized
+            </h1>
+          </div>
+        )}
+      </>
+    );
+  }
   return (
-    <>
-      <NavBar />
-      {status === 'authenticated' && (
-        <div>
-          <h1 className='py-4 text-3xl text-center font-bold'>
-            Resumen del proyecto
-          </h1>
-          <TableBugs nombre={nombre} bugs={bugs}/>
-        </div>
-      )}
-      {status === 'unauthenticated' && (
-        <div>
-          <h1 className='py-4 text-3xl text-center font-bold'>Unauthorized</h1>
-        </div>
-      )}
-    </>
+    <div>
+      <h1 className='py-4 text-3xl text-center font-bold'>Cargando...</h1>
+    </div>
   );
 };
 

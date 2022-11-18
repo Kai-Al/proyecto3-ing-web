@@ -6,6 +6,10 @@ const GET_PROYECTOS = gql`
       id
       nombre
       descripcion
+      usuarios {
+        name
+        role
+      }
     }
   }
 `;
