@@ -4,13 +4,6 @@ import Button from 'components/Button';
 const TableProyectos = ({ usuarios }) => (
   <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
     <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
-      <div className='flex flex-row gap-1 place-content-end'>
-        <Button>
-          <Link href='/newUsuario'>
-            <a>Nuevo usuario</a>
-          </Link>
-        </Button>
-      </div>
       <table>
         <thead>
           <tr>
