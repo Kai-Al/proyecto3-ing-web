@@ -3,15 +3,12 @@ import { NextPage } from 'next/types';
 import { useSession } from 'next-auth/react';
 import TableUsuarios from '@components/TableUsuarios';
 import { useQuery } from '@apollo/client';
-import { useEffect } from 'react';
 import { GET_USUARIOS } from '@graphql/client/queries/getUsuarios';
+import Grafica from '@components/Grafica';
 
 const Home: NextPage = () => {
   const { status } = useSession();
   const { data, loading } = useQuery(GET_USUARIOS);
-
-  useEffect(() => {    console.log('data: ', data);
-  }, [data]);
 
   if (loading) {
     return (
@@ -33,6 +30,7 @@ const Home: NextPage = () => {
         <div>
           <h1 className='py-4 text-3xl text-center font-bold'>Usuarios</h1>
           <TableUsuarios usuarios={data} />
+          <Grafica usuarios={data} />
         </div>
       )}
     </>

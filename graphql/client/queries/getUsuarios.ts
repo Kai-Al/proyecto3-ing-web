@@ -9,6 +9,9 @@ const GET_USUARIOS = gql`
       proyectos {
         nombre
       }
+      bugs {
+        id
+      }
     }
   }
 `;
