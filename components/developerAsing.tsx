@@ -16,7 +16,7 @@ const FormProyecto = () => {
         <select
           aria-label='desarrollador'
           className=' p-2 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600 '
-          onChange={e => {
+          onChange={(e) => {
             state.desarrollador = e.target.value;
           }}
         >

@@ -17,7 +17,7 @@ const FormProyecto = () => {
             type='text'
             id='nombre'
             name='nombre'
-            onChange={e => {
+            onChange={(e) => {
               state.nombre = e.target.value;
             }}
           />
@@ -28,7 +28,7 @@ const FormProyecto = () => {
             type='text'
             id='descripcion'
             name='descripcion'
-            onChange={e => {
+            onChange={(e) => {
               state.descripcion = e.target.value;
             }}
           />

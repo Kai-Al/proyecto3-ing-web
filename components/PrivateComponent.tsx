@@ -11,7 +11,7 @@ const PrivateComponent = ({ roleList, children }: PrivateComponentProps) => {
 
   let roleCheck = false;
   if (session) {
-    roleList.forEach(role => {
+    roleList.forEach((role) => {
       if (session?.user?.role === role) {
         roleCheck = true;
       }
