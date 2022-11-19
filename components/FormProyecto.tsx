@@ -28,7 +28,7 @@ const FormProyecto = () => {
             type='text'
             id='descripcion'
             name='descripcion'
-            onChange={(e) => {
+            onChange={e => {
               state.descripcion = e.target.value;
             }}
           />
