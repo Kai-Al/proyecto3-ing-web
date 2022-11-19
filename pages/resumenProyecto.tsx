@@ -4,10 +4,8 @@ import { useSession } from 'next-auth/react';
 import { GET_PROYECTO } from '@graphql/client/queries/getProyecto';
 import { useQuery } from '@apollo/client';
 import TableBugs from '@components/TableBugs';
-import { useEffect } from 'react';
 
 export async function getServerSideProps(context) {
-  console.log('ID PROYECTO', context.query.id);
   return {
     props: {
       id: context.query.id,
@@ -22,11 +20,6 @@ const ResumenProyecto: NextPage<{ id: String }> = ({ id }) => {
       id,
     },
   });
-  console.log(data);
-
-  useEffect(() => {
-    console.log('data: ', data);
-  }, [data]);
 
   if (!loading) {
     const { descripcion, nombre, usuarios, bugs } = data.obtenerProyecto;
