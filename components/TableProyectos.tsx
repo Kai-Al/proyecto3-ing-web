@@ -4,7 +4,7 @@ import { Enum_Role } from '@prisma/client';
 
 const TableProyectos = ({ proyectos }: any) => (
   <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
-    <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
+    <div className='bg-slate-100 p-4 flex flex-col place-content-center rounded-2xl'>
       <div className='flex flex-row gap-1 place-content-end'>
         <Button>
           <Link href='/newProyecto'>

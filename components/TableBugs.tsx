@@ -1,4 +1,5 @@
 import Button from 'components/Button';
+import Link from 'next/link';
 
 const TableBugs = ({ nombre, bugs }) => (
   <>
@@ -7,7 +8,7 @@ const TableBugs = ({ nombre, bugs }) => (
     </div>
 
     <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
-      <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
+      <div className='bg-slate-100 p-4 flex flex-col place-content-center rounded-2xl'>
         <div className='flex flex-row gap-1 place-content-end'>
           <Button>
             <a>Agregar nuevo bug</a>
@@ -25,7 +26,7 @@ const TableBugs = ({ nombre, bugs }) => (
             </tr>
           </thead>
           <tbody>
-            {bugs.map(bug => (
+            {bugs.map((bug) => (
               <tr>
                 <td className='px-4 py-2'>{bug.id}</td>
                 <td className='px-4 py-2'>{bug.descripcion}</td>
@@ -35,7 +36,16 @@ const TableBugs = ({ nombre, bugs }) => (
                 <td className='px-4 py-2'>
                   <div className='flex flex-row place-content-center gap-1'>
                     <Button>
-                      <a>Ver</a>
+                      <Link
+                        href={{
+                          pathname: `/resumenBug`,
+                          query: {
+                            id: bug.id,
+                          },
+                        }}
+                      >
+                        <a>Ver</a>
+                      </Link>
                     </Button>
                     <Button>
                       <a>Editar</a>

@@ -17,7 +17,6 @@ export async function getServerSideProps(context) {
 
 const ResumenProyecto: NextPage<{ id: String }> = ({ id }) => {
   const { status } = useSession();
-
   const { data, loading } = useQuery(GET_PROYECTO, {
     variables: {
       id,
@@ -41,11 +40,8 @@ const ResumenProyecto: NextPage<{ id: String }> = ({ id }) => {
               <h1>Resumen del proyecto: </h1>
               <h1 className='font-bold ml-4'>{nombre}</h1>
             </div>
-            {/* <h1 className='py-4 text-3xl text-center font-bold'>
-              Resumen del proyecto
-            </h1> */}
-            <div className='flex justify-around'>
-              <div>
+            <div className='flex justify-evenly'>
+              <div className='bg-slate-100 p-2 flex flex-col place-content-center rounded-2xl'>
                 <div className='flex flex-row'>
                   <h1>Nombre del proyecto:</h1>
                   <h1 className='ml-2'>{nombre}</h1>
@@ -55,7 +51,7 @@ const ResumenProyecto: NextPage<{ id: String }> = ({ id }) => {
                   <h1 className='ml-2'>{descripcion}</h1>
                 </div>
               </div>
-              <div className='flex flex-col'>
+              <div className='flex flex-col bg-slate-100 p-2 place-content-center rounded-2xl'>
                 <tbody>
                   <thead>
                     <tr>Integrantes</tr>

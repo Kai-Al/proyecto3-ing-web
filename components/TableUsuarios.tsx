@@ -3,7 +3,7 @@ import Button from 'components/Button';
 
 const TableProyectos = ({ usuarios }) => (
   <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
-    <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
+    <div className='bg-slate-100 p-4 flex flex-col place-content-center rounded-2xl'>
       <table>
         <thead>
           <tr>
