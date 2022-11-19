@@ -5,7 +5,7 @@ import { GET_PROYECTO } from '@graphql/client/queries/getProyecto';
 import { useQuery } from '@apollo/client';
 import TableBugs from '@components/TableBugs';
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   return {
     props: {
       id: context.query.id,
@@ -49,7 +49,7 @@ const ResumenProyecto: NextPage<{ id: String }> = ({ id }) => {
                   <thead>
                     <tr>Integrantes</tr>
                   </thead>
-                  {usuarios.map((usuario) => (
+                  {usuarios.map((usuario: any) => (
                     <tr>
                       <td className='px-4 py-2'>{usuario.name}</td>
                       <td className='px-4 py-2'>{usuario.email}</td>

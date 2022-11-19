@@ -2,7 +2,7 @@ import Button from 'components/Button';
 import Link from 'next/link';
 import ButtonDownloadCSV from 'components/ButtonDownloadCSV';
 
-const TableBugs = ({ nombre, bugs }: any) => (
+const TableBugs = ({ bugs }: any) => (
   <>
     <div className='flex flex-row py-4 text-3xl text-center justify-center'>
       <h1>Bugs del proyecto </h1>

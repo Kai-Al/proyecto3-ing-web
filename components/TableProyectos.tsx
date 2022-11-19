@@ -24,7 +24,7 @@ const TableProyectos = ({ proyectos }: any) => (
           </tr>
         </thead>
         <tbody>
-          {proyectos.obtenerProyectos.map(proyecto => (
+          {proyectos.obtenerProyectos.map((proyecto: any) => (
             <tr>
               <td className='px-4 py-2'>{proyecto.id}</td>
               <td className='px-4 py-2'>{proyecto.nombre}</td>
@@ -33,8 +33,10 @@ const TableProyectos = ({ proyectos }: any) => (
                 <div className='flex flex-col'>
                   {' '}
                   {proyecto.usuarios
-                    .filter(usuario => usuario.role == Enum_Role.Cliente)
-                    .map(usuarioMap => (
+                    .filter(
+                      (usuario: any) => usuario.role === Enum_Role.Cliente
+                    )
+                    .map((usuarioMap: any) => (
                       <a>{usuarioMap.name}</a>
                     ))}
                 </div>
@@ -43,8 +45,11 @@ const TableProyectos = ({ proyectos }: any) => (
                 <div className='flex flex-col'>
                   {' '}
                   {proyecto.usuarios
-                    .filter(usuario => usuario.role == Enum_Role.Desarrrollador)
-                    .map(usuarioMap => (
+                    .filter(
+                      (usuario: any) =>
+                        usuario.role === Enum_Role.Desarrrollador
+                    )
+                    .map((usuarioMap: any) => (
                       <a>{usuarioMap.name}</a>
                     ))}
                 </div>

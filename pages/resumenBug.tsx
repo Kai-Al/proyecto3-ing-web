@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/react';
 import { NextPage } from 'next/types';
 import { useEffect } from 'react';
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
   return {
     props: {
       id: context.query.id,
@@ -21,9 +21,7 @@ const ResumenBug: NextPage<{ id: String }> = ({ id }) => {
     },
   });
 
-  useEffect(() => {
-    console.log('data: ', data);
-  }, [data]);
+  useEffect(() => {}, [data]);
 
   if (!loading) {
     const { carga, estado, prioridad, usuario, comentarios, descripcion } =
@@ -77,7 +75,7 @@ const ResumenBug: NextPage<{ id: String }> = ({ id }) => {
               <table className='bg-slate-100 p-4 flex flex-col place-content-center rounded-2xl'>
                 <thead>
                   <tr>
-                    {comentarios.map((comentario) => (
+                    {comentarios.map((comentario: any) => (
                       <div className='my-8'>
                         <div className='flex flex-row'>
                           <h1>Comentario ID: </h1>
