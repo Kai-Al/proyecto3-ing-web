@@ -24,7 +24,7 @@ const proyectoTypes = gql`
 
   type Query {
     obtenerProyectos: [Proyecto]
-    obtenerProyecto(nombre: String!): Proyecto
+    obtenerProyecto(id: String!): Proyecto
   }
 
   type Mutation {

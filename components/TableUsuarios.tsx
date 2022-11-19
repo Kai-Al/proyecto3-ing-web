@@ -1,13 +1,14 @@
 import Button from 'components/Button';
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactFragment,
+  ReactPortal,
+} from 'react';
 
-const TableProyectos = () => (
+const TableProyectos = ({ usuarios }: any) => (
   <div className='max-w-7xl mx-auto sm:px-6 lg:px-8'>
-    <div className='bg-slate-300 p-2 flex flex-col place-content-center rounded-2xl'>
-      <div className='flex flex-row gap-1 place-content-end'>
-        <Button>
-          <a>Nuevo usuario</a>
-        </Button>
-      </div>
+    <div className='bg-slate-100 p-4 flex flex-col place-content-center rounded-2xl'>
       <table>
         <thead>
           <tr>
@@ -17,29 +18,80 @@ const TableProyectos = () => (
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className='px-4 py-2'>User</td>
-            <td className='px-4 py-2'>Rol cualquiera</td>
-            <td className='px-4 py-2'>
-              <div className='flex flex-col'>
-                {' '}
-                <a>pizzeria</a> <a>panaderia</a>
-              </div>
-            </td>
-            <td className='px-4 py-2'>
-              <div className='flex flex-row place-content-center gap-1'>
-                <Button>
-                  <a>Ver</a>
-                </Button>
-                <Button>
-                  <a>Editar</a>
-                </Button>
-                <Button>
-                  <a>Eliminar</a>
-                </Button>
-              </div>
-            </td>
-          </tr>
+          {usuarios.obtenerUsuarios.map(
+            (usuario: {
+              name:
+                | string
+                | number
+                | boolean
+                | ReactElement<any, string | JSXElementConstructor<any>>
+                | ReactFragment
+                | ReactPortal
+                | null
+                | undefined;
+              role:
+                | string
+                | number
+                | boolean
+                | ReactElement<any, string | JSXElementConstructor<any>>
+                | ReactFragment
+                | ReactPortal
+                | null
+                | undefined;
+              proyectos: {
+                nombre:
+                  | string
+                  | number
+                  | boolean
+                  | ReactElement<any, string | JSXElementConstructor<any>>
+                  | ReactFragment
+                  | ReactPortal
+                  | null
+                  | undefined;
+              }[];
+            }) => (
+              <tr>
+                <td className='px-4 py-2'>{usuario.name}</td>
+                <td className='px-4 py-2'>{usuario.role}</td>
+                <td className='px-4 py-2'>
+                  <div className='flex flex-col'>
+                    {' '}
+                    {usuario.proyectos.map(
+                      (proyectoMap: {
+                        nombre:
+                          | string
+                          | number
+                          | boolean
+                          | ReactElement<
+                              any,
+                              string | JSXElementConstructor<any>
+                            >
+                          | ReactFragment
+                          | ReactPortal
+                          | null
+                          | undefined;
+                      }) => (
+                        <a>{proyectoMap.nombre}</a>
+                      )
+                    )}
+                  </div>
+                </td>
+                <td className='px-4 py-2'>
+                  <div className='flex flex-row place-content-center gap-1'>
+                    <Button>
+                      <a>Ver</a>
+                    </Button>
+                    <Button>
+                      <a>Editar</a>
+                    </Button>
+                    <Button>
+                      <a>Eliminar</a>
+                    </Button>
+                  </div>
+                </td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     </div>
