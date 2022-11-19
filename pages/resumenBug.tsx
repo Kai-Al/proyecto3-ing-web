@@ -24,7 +24,13 @@ const ResumenBug: NextPage<{ id: String }> = ({ id }) => {
   useEffect(() => {}, [data]);
 
   if (!loading) {
-    const { carga, estado, prioridad, usuario, comentarios, descripcion } =
+    const { 
+      carga, 
+      estado, 
+      prioridad, 
+      usuario, 
+      comentarios, 
+      descripcion } =
       data.obtenerBug;
 
     return (
